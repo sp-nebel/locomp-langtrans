@@ -1,7 +1,6 @@
 from huggingface_hub import login
 from evaluate import load, evaluator
 from datasets import load_dataset
-import numpy as np
 from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
 
 login()
@@ -11,9 +10,10 @@ tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForCausalLM.from_pretrained(model_name)
 
 xnli_metric = load("xnli")
+classifier = pipeline("text-classification", model=model, tokenizer=tokenizer)
 xnli_evaluator = evaluator("xnli")
 
-classifier = pipeline("text-classification", model=model, tokenizer=tokenizer)
+
 
 def preprocess_function(examples):
     return [f"Premise: {p} Hypothesis: {h}" for p, h in zip(examples['premise'], examples['hypothesis'])]
