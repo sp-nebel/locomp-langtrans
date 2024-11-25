@@ -4,7 +4,7 @@ from datasets import load_dataset
 import numpy as np
 from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
 
-login(token)
+login()
 
 model_name = "meta-llama/Llama-3.2-1B"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
