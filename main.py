@@ -8,6 +8,9 @@ model_name = "meta-llama/Llama-3.2-1B-Instruct"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForSequenceClassification.from_pretrained(model_name)
 
+embedding_size = model.model.embed_tokens.weight.shape[1]
+print(f'Embedding size: {embedding_size}')
+
 xnli_dataset = load_dataset("xnli", 'en', split="test[:5]")
 xnli_metric = load("xnli")
 
@@ -40,7 +43,7 @@ def compute_metric(dataset):
         print('debug')
         
         
-        predicted_label_id = {v: k for k, v in label_mapping.items()}[predicted_label_obj]
+        predicted_label_id = {v: k for k, v in label_mapping.items()}[predicted_label_obj['label']]
         predictions.append(predicted_label_id)
         references.append(example["label"])
     return xnli_metric.compute(predictions=predictions, references=references)
