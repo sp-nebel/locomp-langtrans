@@ -1,30 +1,48 @@
 from huggingface_hub import login
-from evaluate import load, evaluator
 from datasets import load_dataset
-from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
+from evaluate import load
+from transformers import AutoModelForSequenceClassification, AutoTokenizer, pipeline
 
-login()
 
-model_name = "meta-llama/Llama-3.2-1B"
+model_name = "meta-llama/Llama-3.2-1B-Instruct"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
-model = AutoModelForCausalLM.from_pretrained(model_name)
+model = AutoModelForSequenceClassification.from_pretrained(model_name)
 
+xnli_dataset = load_dataset("xnli", 'en', split="test[:5]")
 xnli_metric = load("xnli")
-classifier = pipeline("text-classification", model=model, tokenizer=tokenizer)
-xnli_evaluator = evaluator("xnli")
 
+
+classifier = pipeline("text-classification", model=model, tokenizer=tokenizer, top_k=None)
+
+label_mapping = {0: "entailment", 1: "neutral", 2: "contradiction"}
 
 
 def preprocess_function(examples):
-    return [f"Premise: {p} Hypothesis: {h}" for p, h in zip(examples['premise'], examples['hypothesis'])]
+    tokenizer.pad_token = tokenizer.eos_token
+    return tokenizer(
+            examples["premise"], examples["hypothesis"], truncation=True, padding="max_length", max_length=128
+        )
 
-xnli_dataset = load_dataset("xnli", split="test[:10%]")
+encoded_dataset = xnli_dataset.map(preprocess_function, batched=False)
 
-def eval(model, tokenizer, dataset, metric, evaluator):
-    results = evaluator.compute(model, tokenizer, dataset, metric, input_column="premise", label_column="label", hypothesis_column="hypothesis", split="test")
-    return results
 
-results = eval(model, tokenizer, xnli_dataset, xnli_metric, xnli_evaluator)
+def compute_metric(dataset):
+    predictions = []
+    references = []
 
-with open('./results.txt', 'w') as f:
-    f.write(results)
+    for example in dataset:
+
+        output = classifier(
+            f"{example['premise']} {tokenizer.sep_token} {example['hypothesis']}"
+        )
+        
+        predicted_label_obj = max(output[0], key=lambda x: x['score'])
+        print('debug')
+        
+        
+        predicted_label_id = {v: k for k, v in label_mapping.items()}[predicted_label_obj]
+        predictions.append(predicted_label_id)
+        references.append(example["label"])
+    return xnli_metric.compute(predictions=predictions, references=references)
+
+accuracy = compute_metric(encoded_dataset)
