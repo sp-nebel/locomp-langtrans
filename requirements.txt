@@ -1,0 +1,5 @@
+torch
+evaluate
+datasets
+huggingface-hub
+transformers

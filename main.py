@@ -1,32 +1,49 @@
 from huggingface_hub import login
 from datasets import load_dataset
 from evaluate import load
-from transformers import AutoModelForSequenceClassification, AutoTokenizer, pipeline
+from transformers import AutoModel, AutoTokenizer, pipeline
 
+prompt = '''<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+Task: Classify the relationship between two sentences (premise and hypothesis).
 
-model_name = "meta-llama/Llama-3.2-1B-Instruct"
+Rules:
+- You MUST respond with EXACTLY ONE of these labels: "entailment", "contradiction", "neutral"
+- DO NOT include any other words, punctuation, or explanations
+- DO NOT add newlines or spaces before/after the label
+
+Example 1:
+Premise: The cat is sleeping.
+Hypothesis: The animal is resting.
+Output: entailment
+
+Example 2:
+Premise: The sky is blue.
+Hypothesis: The sky is red.
+Output: contradiction
+
+Example 3:
+Premise: The man is walking.
+Hypothesis: He is wearing a hat.
+Output: neutral
+<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+Now classify:
+Premise: {premise}
+Hypothesis: {hypothesis}
+Output: <|eot_id|><|start_header_id|>assistant<|end_header_id|>'''
+
+model_name = "meta-llama/Llama-3.2-3B-Instruct"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
-model = AutoModelForSequenceClassification.from_pretrained(model_name)
+model = AutoModel.from_pretrained(model_name)
 
-embedding_size = model.model.embed_tokens.weight.shape[1]
+embedding_size = model.embed_tokens.weight.shape[1]
 print(f'Embedding size: {embedding_size}')
 
 xnli_dataset = load_dataset("xnli", 'en', split="test[:5]")
 xnli_metric = load("xnli")
 
 
-classifier = pipeline("text-classification", model=model, tokenizer=tokenizer, top_k=None)
-
-label_mapping = {0: "entailment", 1: "neutral", 2: "contradiction"}
-
-
-def preprocess_function(examples):
-    tokenizer.pad_token = tokenizer.eos_token
-    return tokenizer(
-            examples["premise"], examples["hypothesis"], truncation=True, padding="max_length", max_length=128
-        )
-
-encoded_dataset = xnli_dataset.map(preprocess_function, batched=False)
+classifier = pipeline("text-generation", model=model_name, tokenizer=tokenizer, top_k=None)
 
 
 def compute_metric(dataset):
@@ -36,16 +53,34 @@ def compute_metric(dataset):
     for example in dataset:
 
         output = classifier(
-            f"{example['premise']} {tokenizer.sep_token} {example['hypothesis']}"
+            prompt.format(premise=example['premise'], hypothesis=example['hypothesis']),
+            max_new_tokens=5,
+            return_full_text=False
         )
         
-        predicted_label_obj = max(output[0], key=lambda x: x['score'])
-        print('debug')
+        print(output)
         
-        
-        predicted_label_id = {v: k for k, v in label_mapping.items()}[predicted_label_obj['label']]
-        predictions.append(predicted_label_id)
-        references.append(example["label"])
-    return xnli_metric.compute(predictions=predictions, references=references)
+        predictions.append(compute_label(output[0]['generated_text']))
+        references.append(example['label'])
+    return xnli_metric.compute(predictions=predictions, references=references), predictions, references
 
-accuracy = compute_metric(encoded_dataset)
+def compute_label(input: str):
+    if 'entailment' in input:
+        return 0
+    elif 'neutral' in input:
+        return 1
+    elif 'contradiction' in input:
+        return 2
+    else:
+        return None
+
+accuracy, predictions, references = compute_metric(xnli_dataset)
+
+with open('output.txt', 'w') as f:
+    f.write(f'Accuracy: {accuracy}\n')
+    f.write('Predictions: \n')
+    for pred in predictions:
+        f.write(f'{pred}\n')
+    f.write('References: \n')
+    for ref in references:
+        f.write(f'{ref}\n')
