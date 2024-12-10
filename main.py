@@ -36,14 +36,11 @@ model_name = "meta-llama/Llama-3.2-3B-Instruct"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModel.from_pretrained(model_name)
 
-embedding_size = model.embed_tokens.weight.shape[1]
-print(f'Embedding size: {embedding_size}')
-
-xnli_dataset = load_dataset("xnli", 'en', split="test[:5]")
+xnli_dataset = load_dataset("xnli", 'en', split="test")
 xnli_metric = load("xnli")
 
 
-classifier = pipeline("text-generation", model=model_name, tokenizer=tokenizer, top_k=None)
+classifier = pipeline("text-generation", model=model_name, tokenizer=tokenizer, device=1, top_k=None)
 
 
 def compute_metric(dataset):
