@@ -1,4 +1,3 @@
-from huggingface_hub import login
 from datasets import load_dataset
 from evaluate import load
 from transformers import AutoModel, AutoTokenizer, pipeline
@@ -32,20 +31,21 @@ Premise: {premise}
 Hypothesis: {hypothesis}
 Output: <|eot_id|><|start_header_id|>assistant<|end_header_id|>'''
 
-model_name = "meta-llama/Llama-3.2-3B-Instruct"
+model_name = "meta-llama/Llama-3.2-1B-Instruct"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModel.from_pretrained(model_name)
 
-xnli_dataset = load_dataset("xnli", 'en', split="test")
+xnli_dataset = load_dataset("xnli", 'all_languages', split="test", streaming=True)
 xnli_metric = load("xnli")
 
 
-classifier = pipeline("text-generation", model=model_name, tokenizer=tokenizer, device=1, top_k=None)
+classifier = pipeline("text-generation", model=model_name, tokenizer=tokenizer, device=-1, top_k=None)
 
 
 def compute_metric(dataset):
     predictions = []
     references = []
+    languages = []
 
     for example in dataset:
 
@@ -59,7 +59,8 @@ def compute_metric(dataset):
         
         predictions.append(compute_label(output[0]['generated_text']))
         references.append(example['label'])
-    return xnli_metric.compute(predictions=predictions, references=references), predictions, references
+        languages.append()
+    return xnli_metric.compute(predictions=predictions, references=references), predictions, references, languages
 
 def compute_label(input: str):
     if 'entailment' in input:
@@ -71,13 +72,9 @@ def compute_label(input: str):
     else:
         return None
 
-accuracy, predictions, references = compute_metric(xnli_dataset)
+if __name__ == "__main__":
+    accuracy, predictions, references = compute_metric(xnli_dataset)
 
-with open('output.txt', 'w') as f:
-    f.write(f'Accuracy: {accuracy}\n')
-    f.write('Predictions: \n')
-    for pred in predictions:
-        f.write(f'{pred}\n')
-    f.write('References: \n')
-    for ref in references:
-        f.write(f'{ref}\n')
+    with open('output.txt', 'w') as f:
+        f.write(f'Accuracy: {accuracy}\n')
+        for pred, ref, lang in 
