@@ -71,7 +71,7 @@ def run_classification_evaluation():
 
     tokenizer = AutoTokenizer.from_pretrained(model_name)
 
-    xnli_dataset = load_dataset("xnli", language, split="test", streaming=True)
+    xnli_dataset = load_dataset("xnli", language, split="test", streaming=False)
     xnli_metric = load("xnli")
 
 
