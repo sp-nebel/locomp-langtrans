@@ -1,3 +1,4 @@
+import sys
 from datasets import load_dataset
 from evaluate import load
 from transformers import AutoModel, AutoTokenizer, pipeline
@@ -31,21 +32,13 @@ Premise: {premise}
 Hypothesis: {hypothesis}
 Output: <|eot_id|><|start_header_id|>assistant<|end_header_id|>'''
 
-model_name = "meta-llama/Llama-3.2-1B-Instruct"
-tokenizer = AutoTokenizer.from_pretrained(model_name)
-model = AutoModel.from_pretrained(model_name)
-
-xnli_dataset = load_dataset("xnli", 'all_languages', split="test", streaming=True)
-xnli_metric = load("xnli")
+model_name = "meta-llama/Llama-3.2-3B-Instruct"
 
 
-classifier = pipeline("text-generation", model=model_name, tokenizer=tokenizer, device=-1, top_k=None)
 
-
-def compute_metric(dataset):
+def compute_metric(dataset, classifier, xnli_metric):
     predictions = []
     references = []
-    languages = []
 
     for example in dataset:
 
@@ -59,8 +52,7 @@ def compute_metric(dataset):
         
         predictions.append(compute_label(output[0]['generated_text']))
         references.append(example['label'])
-        languages.append()
-    return xnli_metric.compute(predictions=predictions, references=references), predictions, references, languages
+    return xnli_metric.compute(predictions=predictions, references=references), predictions, references
 
 def compute_label(input: str):
     if 'entailment' in input:
@@ -71,10 +63,26 @@ def compute_label(input: str):
         return 2
     else:
         return None
+    
+def run_classification_evaluation():
+
+    language = sys.argv[1]
+    run_name = sys.argv[2]
+
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
+
+    xnli_dataset = load_dataset("xnli", language, split="test", streaming=True)
+    xnli_metric = load("xnli")
+
+
+    classifier = pipeline("text-generation", model=model_name, tokenizer=tokenizer, device=0, top_k=None)
+
+    accuracy, predictions, references = compute_metric(xnli_dataset, classifier, xnli_metric)
+
+    with open(f'{run_name}_{language}.txt', 'w') as f:
+        f.write(f'Accuracy: {accuracy}\n')
+        for pred, ref in zip(predictions, references):
+            f.write(f'{pred}, {ref}\n')
 
 if __name__ == "__main__":
-    accuracy, predictions, references = compute_metric(xnli_dataset)
-
-    with open('output.txt', 'w') as f:
-        f.write(f'Accuracy: {accuracy}\n')
-        for pred, ref, lang in 
+    run_classification_evaluation()
