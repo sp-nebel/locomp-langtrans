@@ -35,6 +35,11 @@ def preprocess_function(examples):
 def preprocess_dataset_with_prompt(dataset):
     return dataset.map(preprocess_function, batched=True)
 
+def save_results(results):
+    with open('results.txt', 'w') as f:
+        for result in results:
+            f.write(result + '\n')
+
 def run_translation_eval():
     eng_flores, deu_flores = load_datasets()
     translation_pipeline = setup_pipeline()
@@ -42,8 +47,9 @@ def run_translation_eval():
 
     translations = translation_pipeline(eng_prompts, return_full_text=False)
     
-    
     translation_metric = load('sacrebleu')
+    result = translation_metric.compute(predictions=translations, references=deu_flores['text'])
+    save_results(result)
 
 
 if __name__ == '__main__':
