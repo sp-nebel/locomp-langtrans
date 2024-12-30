@@ -2,8 +2,8 @@
 #SBATCH --partition=gpu_4
 #SBATCH --ntasks=40
 #SBATCH --time=00:30:00
-#SBATCH --mem=20gb
-#SBATCH --gres=gpu:2
+#SBATCH --mem=10gb
+#SBATCH --gres=gpu:1
 #SBATCH --mail-user=usxcp@student.kit.edu
 #SBATCH --mail-type=ALL
 #SBATCH --job-name=translation_job
