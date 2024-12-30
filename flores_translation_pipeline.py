@@ -9,7 +9,7 @@ Translate English to German. Maintain the original meaning, tone, and formatting
 {}<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 '''
 
-model_name = "meta-llama/Llama-3.2-1B-Instruct"
+model_name = "meta-llama/Llama-3.2-3B-Instruct"
 
 def load_datasets():
     flores = load_dataset('openlanguagedata/flores_plus', split='devtest', streaming=True)

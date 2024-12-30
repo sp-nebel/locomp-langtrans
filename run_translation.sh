@@ -12,5 +12,5 @@
 module load devel/miniconda
 conda activate llama_test_env
 pip install -r requirements.txt
-python3 flores_translation_pipline.py
+python3 flores_translation_pipeline.py
 conda deactivate
