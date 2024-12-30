@@ -1,10 +1,9 @@
-from datasets import load_dataset, interleave_datasets
+from datasets import load_dataset
 from evaluate import load
 from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
-from itertools import islice
 
 prompt = '''<|begin_of_text|><|start_header_id|>system<|end_header_id|>
-Translate English to German. Maintain the original meaning, tone, and formatting. Provide only the translation without additional text or explanations.
+Translate the user input from English to German. Maintain the original meaning, tone, and formatting. Provide only the translation without additional text or explanations.
 <|eot_id|><|start_header_id|>user<|end_header_id|>
 {}<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 '''
@@ -47,9 +46,10 @@ def run_translation_eval():
     eng_prompts = preprocess_dataset_with_prompt(eng_flores)
 
     translations = translation_pipeline(eng_prompts, return_full_text=False)
+    generated_texts = [translation['generated_text'] for translation in translations]
     
     translation_metric = load('sacrebleu')
-    result = translation_metric.compute(predictions=translations, references=deu_flores['text'])
+    result = translation_metric.compute(predictions=generated_texts, references=deu_flores['text'])
     save_results(result)
 
 
