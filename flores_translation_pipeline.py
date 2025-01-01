@@ -11,7 +11,7 @@ Translate the user input from English to German. Maintain the original meaning, 
 model_name = "meta-llama/Llama-3.2-3B-Instruct"
 
 def load_datasets():
-    flores = load_dataset('openlanguagedata/flores_plus', split='devtest', streaming=True)
+    flores = load_dataset('openlanguagedata/flores_plus', split='devtest', streaming=False)
     flores_redux = flores.select_columns(['id', 'iso_639_3', 'text'])
     eng_flores = flores_redux.filter(lambda x: x['iso_639_3'] in ['eng'])
     deu_flores = flores_redux.filter(lambda x: x['iso_639_3'] in ['deu'])
@@ -30,7 +30,7 @@ def setup_pipeline():
     return translation_pipeline
 
 def preprocess_function(examples):
-    return [prompt.format(example['text']) for example in examples]
+    return [prompt.format(single_text) for single_text in examples['text']]
 
 def preprocess_dataset_with_prompt(dataset):
     return dataset.map(preprocess_function, batched=True)
@@ -42,10 +42,11 @@ def save_results(results):
 
 def run_translation_eval():
     eng_flores, deu_flores = load_datasets()
-    translation_pipeline = setup_pipeline()
+    #translation_pipeline = setup_pipeline()
     eng_prompts = preprocess_dataset_with_prompt(eng_flores)
 
-    translations = translation_pipeline(eng_prompts, return_full_text=False)
+    #translations = translation_pipeline(eng_prompts, return_full_text=False)
+    translations = []
     generated_texts = [translation['generated_text'] for translation in translations]
     
     translation_metric = load('sacrebleu')
