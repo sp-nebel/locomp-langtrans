@@ -25,7 +25,8 @@ def setup_pipeline():
         model=model,
         tokenizer=tokenizer,
         return_full_text=False,
-        device=0
+        device=0,
+        max_new_tokens=20
     )
     return translation_pipeline
 
