@@ -47,7 +47,7 @@ def run_translation_eval():
     translation_pipeline = setup_pipeline()
     eng_prompts = preprocess_dataset_with_prompt(eng_flores)
 
-    translations = translation_pipeline(eng_prompts, return_full_text=False)
+    translations = translation_pipeline(eng_prompts['text'], return_full_text=False)
     translations = []
     generated_texts = [translation['generated_text'] for translation in translations]
     
