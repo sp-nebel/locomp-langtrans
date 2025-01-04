@@ -4,3 +4,4 @@ datasets
 huggingface-hub
 transformers
 sacrebleu
+torchinfo
