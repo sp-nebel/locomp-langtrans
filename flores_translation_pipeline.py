@@ -38,6 +38,12 @@ def preprocess_function(examples):
 def preprocess_dataset_with_prompt(dataset):
     return dataset.map(preprocess_function, batched=True)
 
+def make_reference_list(dataset):
+    returnlist = []
+    for text in dataset['text']:
+        returnlist.append([text])
+    return returnlist
+
 def save_results(results):
     with open('results.txt', 'w') as f:
         for result in results:
@@ -53,7 +59,8 @@ def run_translation_eval():
     generated_texts = [translation['generated_text'] for translation in translations]
     
     translation_metric = load('sacrebleu')
-    result = translation_metric.compute(predictions=generated_texts, references=deu_flores['text'])
+    references = make_reference_list(deu_flores)
+    result = translation_metric.compute(predictions=generated_texts, references=references)
     save_results(result)
 
 
