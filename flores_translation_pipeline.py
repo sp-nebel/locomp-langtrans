@@ -30,7 +30,9 @@ def setup_pipeline():
     return translation_pipeline
 
 def preprocess_function(examples):
-    return [prompt.format(single_text) for single_text in examples['text']]
+    for example in examples:
+        example['text'] = prompt.format(example['text'])
+    return examples
 
 def preprocess_dataset_with_prompt(dataset):
     return dataset.map(preprocess_function, batched=True)
@@ -42,10 +44,10 @@ def save_results(results):
 
 def run_translation_eval():
     eng_flores, deu_flores = load_datasets()
-    #translation_pipeline = setup_pipeline()
+    translation_pipeline = setup_pipeline()
     eng_prompts = preprocess_dataset_with_prompt(eng_flores)
 
-    #translations = translation_pipeline(eng_prompts, return_full_text=False)
+    translations = translation_pipeline(eng_prompts, return_full_text=False)
     translations = []
     generated_texts = [translation['generated_text'] for translation in translations]
     
