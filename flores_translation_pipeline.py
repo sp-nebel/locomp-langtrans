@@ -8,7 +8,7 @@ Translate the user input from English to German. Maintain the original meaning, 
 {}<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 '''
 
-model_name = "meta-llama/Llama-3.2-3B-Instruct"
+model_name = "meta-llama/Llama-3.2-1B-Instruct"
 
 def load_datasets():
     flores = load_dataset('openlanguagedata/flores_plus', split='devtest', streaming=False)
@@ -30,8 +30,8 @@ def setup_pipeline():
     return translation_pipeline
 
 def preprocess_function(examples):
-    for example in examples:
-        example['text'] = prompt.format(example['text'])
+    for text in examples['text']:
+        text = prompt.format(text)
     return examples
 
 def preprocess_dataset_with_prompt(dataset):
