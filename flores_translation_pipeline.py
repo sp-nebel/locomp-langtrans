@@ -20,9 +20,7 @@ def load_datasets():
     flores = load_dataset('openlanguagedata/flores_plus', split='devtest', streaming=False)
     flores_redux = flores.select_columns(['id', 'iso_639_3', 'text'])
     eng_flores = flores_redux.filter(lambda x: x['iso_639_3'] in ['eng'])
-    eng_flores = eng_flores.select(range(2))
     deu_flores = flores_redux.filter(lambda x: x['iso_639_3'] in ['deu'])
-    deu_flores = deu_flores.select(range(2))
     return eng_flores, deu_flores
 
 def setup_pipeline():
