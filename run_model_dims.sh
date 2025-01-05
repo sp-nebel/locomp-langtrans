@@ -1,7 +1,7 @@
 #!/bin/bash
-#SBATCH --partition=gpu_4
-#SBATCH --ntasks=40
-#SBATCH --time=00:02:00
+#SBATCH --partition=dev_gpu_4
+#SBATCH --ntasks=20
+#SBATCH --time=00:10:00
 #SBATCH --mem=12gb
 #SBATCH --gres=gpu:1
 #SBATCH --output=../dim_job.out
