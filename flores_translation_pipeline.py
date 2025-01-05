@@ -14,15 +14,15 @@ def create_prompt(text: str) -> str:
 <|eot_id|>
 <|start_header_id|>assistant<|end_header_id|>"""
 
-model_name = "meta-llama/Llama-3.2-1B-Instruct"
+model_name = "meta-llama/Llama-3.2-3B-Instruct"
 
 def load_datasets():
     flores = load_dataset('openlanguagedata/flores_plus', split='devtest', streaming=False)
     flores_redux = flores.select_columns(['id', 'iso_639_3', 'text'])
     eng_flores = flores_redux.filter(lambda x: x['iso_639_3'] in ['eng'])
-    eng_flores = eng_flores.select(range(1))
+    eng_flores = eng_flores.select(range(2))
     deu_flores = flores_redux.filter(lambda x: x['iso_639_3'] in ['deu'])
-    deu_flores = deu_flores.select(range(1))
+    deu_flores = deu_flores.select(range(2))
     return eng_flores, deu_flores
 
 def setup_pipeline():
@@ -57,10 +57,9 @@ def make_reference_list(dataset):
         returnlist.append([text])
     return returnlist
 
-def save_results(results):
-    with open('results.txt', 'w') as f:
-        for result in results:
-            f.write(result + '\n')
+def save_results(result):
+    with open('translation_results.txt', 'w') as f:
+        f.write(str(result))
 
 def run_translation_eval():
     eng_flores, deu_flores = load_datasets()
@@ -68,7 +67,7 @@ def run_translation_eval():
     eng_prompts = preprocess_dataset_with_prompt(eng_flores)
 
     translations = translation_pipeline(eng_prompts['processed_input'], return_full_text=False)
-    generated_texts = [translation['generated_text'] for translation in translations]
+    generated_texts = [translation[0]['generated_text'] for translation in translations]
     
     translation_metric = load('sacrebleu')
     references = make_reference_list(deu_flores)
