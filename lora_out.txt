@@ -1,0 +1,121 @@
+Defaulting to user installation because normal site-packages is not writeable
+Requirement already satisfied: torch in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from -r requirements.txt (line 1)) (2.5.1)
+Requirement already satisfied: evaluate in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from -r requirements.txt (line 2)) (0.4.3)
+Requirement already satisfied: datasets in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from -r requirements.txt (line 3)) (3.1.0)
+Requirement already satisfied: huggingface-hub in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from -r requirements.txt (line 4)) (0.26.3)
+Requirement already satisfied: transformers in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from -r requirements.txt (line 5)) (4.46.3)
+Requirement already satisfied: sacrebleu in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from -r requirements.txt (line 6)) (2.4.3)
+Requirement already satisfied: torchinfo in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from -r requirements.txt (line 7)) (1.8.0)
+Requirement already satisfied: peft in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from -r requirements.txt (line 8)) (0.14.0)
+Requirement already satisfied: filelock in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 1)) (3.16.1)
+Requirement already satisfied: typing-extensions>=4.8.0 in /pfs/data5/software_uc2/bwhpc/common/devel/miniconda/23.9.0-py3.9.15/lib/python3.9/site-packages (from torch->-r requirements.txt (line 1)) (4.8.0)
+Requirement already satisfied: networkx in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 1)) (3.2.1)
+Requirement already satisfied: jinja2 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 1)) (3.1.4)
+Requirement already satisfied: fsspec in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 1)) (2024.9.0)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.4.127 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 1)) (12.4.127)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.4.127 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 1)) (12.4.127)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.4.127 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 1)) (12.4.127)
+Requirement already satisfied: nvidia-cudnn-cu12==9.1.0.70 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 1)) (9.1.0.70)
+Requirement already satisfied: nvidia-cublas-cu12==12.4.5.8 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 1)) (12.4.5.8)
+Requirement already satisfied: nvidia-cufft-cu12==11.2.1.3 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 1)) (11.2.1.3)
+Requirement already satisfied: nvidia-curand-cu12==10.3.5.147 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 1)) (10.3.5.147)
+Requirement already satisfied: nvidia-cusolver-cu12==11.6.1.9 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 1)) (11.6.1.9)
+Requirement already satisfied: nvidia-cusparse-cu12==12.3.1.170 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 1)) (12.3.1.170)
+Requirement already satisfied: nvidia-nccl-cu12==2.21.5 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 1)) (2.21.5)
+Requirement already satisfied: nvidia-nvtx-cu12==12.4.127 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 1)) (12.4.127)
+Requirement already satisfied: nvidia-nvjitlink-cu12==12.4.127 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 1)) (12.4.127)
+Requirement already satisfied: triton==3.1.0 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 1)) (3.1.0)
+Requirement already satisfied: sympy==1.13.1 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 1)) (1.13.1)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from sympy==1.13.1->torch->-r requirements.txt (line 1)) (1.3.0)
+Requirement already satisfied: numpy>=1.17 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from evaluate->-r requirements.txt (line 2)) (2.0.2)
+Requirement already satisfied: dill in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from evaluate->-r requirements.txt (line 2)) (0.3.8)
+Requirement already satisfied: pandas in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from evaluate->-r requirements.txt (line 2)) (2.2.3)
+Requirement already satisfied: requests>=2.19.0 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from evaluate->-r requirements.txt (line 2)) (2.32.3)
+Requirement already satisfied: tqdm>=4.62.1 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from evaluate->-r requirements.txt (line 2)) (4.67.1)
+Requirement already satisfied: xxhash in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from evaluate->-r requirements.txt (line 2)) (3.5.0)
+Requirement already satisfied: multiprocess in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from evaluate->-r requirements.txt (line 2)) (0.70.16)
+Requirement already satisfied: packaging in /pfs/data5/software_uc2/bwhpc/common/devel/miniconda/23.9.0-py3.9.15/lib/python3.9/site-packages (from evaluate->-r requirements.txt (line 2)) (23.1)
+Requirement already satisfied: pyarrow>=15.0.0 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from datasets->-r requirements.txt (line 3)) (18.1.0)
+Requirement already satisfied: aiohttp in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from datasets->-r requirements.txt (line 3)) (3.11.9)
+Requirement already satisfied: pyyaml>=5.1 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from datasets->-r requirements.txt (line 3)) (6.0.2)
+Requirement already satisfied: regex!=2019.12.17 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from transformers->-r requirements.txt (line 5)) (2024.11.6)
+Requirement already satisfied: tokenizers<0.21,>=0.20 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from transformers->-r requirements.txt (line 5)) (0.20.3)
+Requirement already satisfied: safetensors>=0.4.1 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from transformers->-r requirements.txt (line 5)) (0.4.5)
+Requirement already satisfied: portalocker in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from sacrebleu->-r requirements.txt (line 6)) (3.0.0)
+Requirement already satisfied: tabulate>=0.8.9 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from sacrebleu->-r requirements.txt (line 6)) (0.9.0)
+Requirement already satisfied: colorama in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from sacrebleu->-r requirements.txt (line 6)) (0.4.6)
+Requirement already satisfied: lxml in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from sacrebleu->-r requirements.txt (line 6)) (5.3.0)
+Requirement already satisfied: psutil in /pfs/data5/software_uc2/bwhpc/common/devel/miniconda/23.9.0-py3.9.15/lib/python3.9/site-packages (from peft->-r requirements.txt (line 8)) (5.9.6)
+Requirement already satisfied: accelerate>=0.21.0 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from peft->-r requirements.txt (line 8)) (1.2.1)
+Requirement already satisfied: aiohappyeyeballs>=2.3.0 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from aiohttp->datasets->-r requirements.txt (line 3)) (2.4.4)
+Requirement already satisfied: aiosignal>=1.1.2 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from aiohttp->datasets->-r requirements.txt (line 3)) (1.3.1)
+Requirement already satisfied: async-timeout<6.0,>=4.0 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from aiohttp->datasets->-r requirements.txt (line 3)) (5.0.1)
+Requirement already satisfied: attrs>=17.3.0 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from aiohttp->datasets->-r requirements.txt (line 3)) (24.2.0)
+Requirement already satisfied: frozenlist>=1.1.1 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from aiohttp->datasets->-r requirements.txt (line 3)) (1.5.0)
+Requirement already satisfied: multidict<7.0,>=4.5 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from aiohttp->datasets->-r requirements.txt (line 3)) (6.1.0)
+Requirement already satisfied: propcache>=0.2.0 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from aiohttp->datasets->-r requirements.txt (line 3)) (0.2.1)
+Requirement already satisfied: yarl<2.0,>=1.17.0 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from aiohttp->datasets->-r requirements.txt (line 3)) (1.18.3)
+Requirement already satisfied: charset-normalizer<4,>=2 in /pfs/data5/software_uc2/bwhpc/common/devel/miniconda/23.9.0-py3.9.15/lib/python3.9/site-packages (from requests>=2.19.0->evaluate->-r requirements.txt (line 2)) (2.0.4)
+Requirement already satisfied: idna<4,>=2.5 in /pfs/data5/software_uc2/bwhpc/common/devel/miniconda/23.9.0-py3.9.15/lib/python3.9/site-packages (from requests>=2.19.0->evaluate->-r requirements.txt (line 2)) (3.4)
+Requirement already satisfied: urllib3<3,>=1.21.1 in /pfs/data5/software_uc2/bwhpc/common/devel/miniconda/23.9.0-py3.9.15/lib/python3.9/site-packages (from requests>=2.19.0->evaluate->-r requirements.txt (line 2)) (1.26.16)
+Requirement already satisfied: certifi>=2017.4.17 in /pfs/data5/software_uc2/bwhpc/common/devel/miniconda/23.9.0-py3.9.15/lib/python3.9/site-packages (from requests>=2.19.0->evaluate->-r requirements.txt (line 2)) (2023.7.22)
+Requirement already satisfied: MarkupSafe>=2.0 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from jinja2->torch->-r requirements.txt (line 1)) (3.0.2)
+Requirement already satisfied: python-dateutil>=2.8.2 in /pfs/data5/software_uc2/bwhpc/common/devel/miniconda/23.9.0-py3.9.15/lib/python3.9/site-packages (from pandas->evaluate->-r requirements.txt (line 2)) (2.8.2)
+Requirement already satisfied: pytz>=2020.1 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from pandas->evaluate->-r requirements.txt (line 2)) (2024.2)
+Requirement already satisfied: tzdata>=2022.7 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from pandas->evaluate->-r requirements.txt (line 2)) (2024.2)
+Requirement already satisfied: six>=1.5 in /pfs/data5/software_uc2/bwhpc/common/devel/miniconda/23.9.0-py3.9.15/lib/python3.9/site-packages (from python-dateutil>=2.8.2->pandas->evaluate->-r requirements.txt (line 2)) (1.16.0)
+Detected kernel version 4.18.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+  0%|          | 0/2 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "/pfs/data5/home/kit/stud/usxcp/mini-decoder-adaptation/xnli_lora_training.py", line 119, in <module>
+    run_training_experiment()
+  File "/pfs/data5/home/kit/stud/usxcp/mini-decoder-adaptation/xnli_lora_training.py", line 114, in run_training_experiment
+    trainer.train()
+  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/transformers/trainer.py", line 2123, in train
+    return inner_training_loop(
+  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/transformers/trainer.py", line 2481, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/transformers/trainer.py", line 3579, in training_step
+    loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/transformers/trainer.py", line 3633, in compute_loss
+    outputs = model(**inputs)
+  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/torch/nn/parallel/data_parallel.py", line 183, in forward
+    inputs, module_kwargs = self.scatter(inputs, kwargs, self.device_ids)
+  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/torch/nn/parallel/data_parallel.py", line 207, in scatter
+    return scatter_kwargs(inputs, kwargs, device_ids, dim=self.dim)
+  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/torch/nn/parallel/scatter_gather.py", line 89, in scatter_kwargs
+    scattered_kwargs = scatter(kwargs, target_gpus, dim) if kwargs else []
+  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/torch/nn/parallel/scatter_gather.py", line 75, in scatter
+    res = scatter_map(inputs)
+  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/torch/nn/parallel/scatter_gather.py", line 66, in scatter_map
+    return [type(obj)(i) for i in zip(*map(scatter_map, obj.items()))]
+  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/torch/nn/parallel/scatter_gather.py", line 62, in scatter_map
+    return list(zip(*map(scatter_map, obj)))
+  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/torch/nn/parallel/scatter_gather.py", line 58, in scatter_map
+    return Scatter.apply(target_gpus, None, dim, obj)
+  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/torch/autograd/function.py", line 575, in apply
+    return super().apply(*args, **kwargs)  # type: ignore[misc]
+  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/torch/nn/parallel/_functions.py", line 104, in forward
+    outputs = comm.scatter(input, target_gpus, chunk_sizes, ctx.dim, streams)
+  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/torch/nn/parallel/comm.py", line 205, in scatter
+    return tuple(torch._C._scatter(tensor, devices, chunk_sizes, dim, streams))
+RuntimeError: chunk expects at least a 1-dimensional tensor
+  0%|          | 0/2 [00:03<?, ?it/s]
+
+============================= JOB FEEDBACK =============================
+
+NodeName=uc2n520
+Job ID: 25102672
+Cluster: uc2
+User/Group: usxcp/stud
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 20
+CPU Utilized: 00:00:13
+CPU Efficiency: 0.43% of 00:50:40 core-walltime
+Job Wall-clock time: 00:02:32
+Memory Utilized: 5.13 GB
+Memory Efficiency: 4.01% of 128.00 GB
