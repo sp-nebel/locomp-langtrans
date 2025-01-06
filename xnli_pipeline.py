@@ -1,7 +1,7 @@
 import sys
 from datasets import load_dataset
 from evaluate import load
-from transformers import AutoModel, AutoTokenizer, pipeline
+from transformers import AutoTokenizer, pipeline
 
 prompt = '''<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 Task: Classify the relationship between two sentences (premise and hypothesis).
