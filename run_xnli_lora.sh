@@ -2,7 +2,7 @@
 #SBATCH --partition=dev_gpu_4
 #SBATCH --ntasks=20
 #SBATCH --time=00:20:00
-#SBATCH --mem=16gb
+#SBATCH --mem=32gb
 #SBATCH --gres=gpu:2
 #SBATCH --mail-user=usxcp@student.kit.edu
 #SBATCH --mail-type=ALL
