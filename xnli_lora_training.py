@@ -55,7 +55,7 @@ training_args = TrainingArguments(
     logging_steps=5,
     remove_unused_columns=True,
     logging_dir='./logs',
-    use_cpu=True
+    use_cpu=False
 )
 
 xnli_metric = load('xnli')
