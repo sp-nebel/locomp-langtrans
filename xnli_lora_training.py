@@ -61,7 +61,7 @@ training_args = TrainingArguments(
 xnli_metric = load('xnli')
 
 def prepare_tokenized_xnlis(tokenizer):
-    xnli = load_dataset('xnli', 'all_languages', split='train[:10]', streaming=False)
+    xnli = load_dataset('xnli', 'en', split='train[:10]', streaming=False)
     xnli = preprocess_dataset(xnli, tokenizer)
     xnlis = xnli.train_test_split(test_size=0.1)
     return xnlis
@@ -94,6 +94,7 @@ def setup_peft_model(model_name, config):
     return lora_model
 
 def compute_metrics(eval_pred):
+    #TODO: Implement this
     pass
 
 def run_training_experiment():
