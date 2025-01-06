@@ -2,6 +2,7 @@ from datasets import load_dataset
 from evaluate import load
 from transformers import AutoTokenizer, AutoModelForCausalLM, TrainingArguments, Trainer
 from peft import LoraConfig, get_peft_model
+import torch
 
 system_prompt = '''Task: Classify the relationship between two sentences (premise and hypothesis).
 
@@ -55,7 +56,6 @@ training_args = TrainingArguments(
     logging_steps=5,
     remove_unused_columns=True,
     logging_dir='./logs',
-    use_cpu=False
 )
 
 xnli_metric = load('xnli')
@@ -77,11 +77,28 @@ def preprocess_dataset(dataset, tokenizer):
     )
 
     def tokenize_function(examples):
-        return tokenizer(examples['prompt'], padding='max_length', truncation=True)
+        prompts = [create_prompt(p, h) for p, h in zip(examples['premise'], examples['hypothesis'])]
+        
+        # Add padding and truncation
+        model_inputs = tokenizer(
+            prompts,
+            padding='max_length',
+            truncation=True,
+            max_length=512,
+            return_tensors="pt"
+        )
+        
+        # Create label tensors
+        labels = torch.tensor(examples['label'])
+        
+        # Add labels to model inputs
+        model_inputs['labels'] = labels
+        
+        return model_inputs
     
     tokenized_dataset = prompt_dataset.map(tokenize_function, batched=True)
 
-    tokenized_dataset.set_format(type='torch', columns=['input_ids', 'attention_mask', 'label'])
+    tokenized_dataset.set_format(type='torch', columns=['input_ids', 'attention_mask', 'labels'])
 
     return tokenized_dataset
 
@@ -102,7 +119,14 @@ def run_training_experiment():
     tokenizer.pad_token = tokenizer.eos_token
     xnlis = prepare_tokenized_xnlis(tokenizer)
     model = setup_peft_model(model_name, lora_config)
-
+    
+    # Move model to CUDA if available
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    model.to(device)
+    
+    # Update training arguments
+    training_args.dataloader_pin_memory = False  # Prevent memory issues
+    
     trainer = Trainer(
         model=model,
         args=training_args,
@@ -110,7 +134,7 @@ def run_training_experiment():
         train_dataset=xnlis['train'],
         eval_dataset=xnlis['test']
     )
-
+    
     trainer.train()
 
     model.save_pretrained(f'{model_name}_xnli_lora')
