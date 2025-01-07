@@ -77,22 +77,22 @@ def preprocess_dataset(dataset, tokenizer):
     )
 
     def tokenize_function(examples):
-        prompts = examples['prompt']
-        
-        # Add padding and truncation
         model_inputs = tokenizer(
-            prompts,
+            examples['prompt'],
             padding='max_length',
             truncation=True,
             max_length=512,
-            return_tensors="pt"
         )
         
-        # Create label tensors
-        labels = torch.tensor(examples['label'])
+        # Create properly shaped label tensors
+        labels = torch.tensor(examples['label'], dtype=torch.long).reshape(-1)
         
-        # Add labels to model inputs
-        model_inputs['labels'] = labels
+        # Convert to tensors and ensure proper shape
+        model_inputs = {
+            'input_ids': torch.tensor(model_inputs['input_ids']),
+            'attention_mask': torch.tensor(model_inputs['attention_mask']),
+            'labels': labels
+        }
         
         return model_inputs
     
@@ -120,12 +120,11 @@ def run_training_experiment():
     xnlis = prepare_tokenized_xnlis(tokenizer)
     model = setup_peft_model(model_name, lora_config)
     
-    # Move model to CUDA if available
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model.to(device)
-    
-    # Update training arguments
-    training_args.dataloader_pin_memory = False  # Prevent memory issues
+    training_args.dataloader_pin_memory = False
+    training_args.data_parallel_backend = False
+
+    if torch.cuda.is_available():
+        model.cuda()
     
     trainer = Trainer(
         model=model,
