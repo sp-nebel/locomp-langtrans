@@ -84,16 +84,6 @@ def preprocess_dataset(dataset, tokenizer):
             max_length=512,
         )
         
-        # Create properly shaped label tensors
-        labels = torch.tensor(examples['label'], dtype=torch.long).reshape(-1)
-        
-        # Convert to tensors and ensure proper shape
-        model_inputs = {
-            'input_ids': torch.tensor(model_inputs['input_ids']),
-            'attention_mask': torch.tensor(model_inputs['attention_mask']),
-            'labels': labels
-        }
-        
         return model_inputs
     
     tokenized_dataset = prompt_dataset.map(tokenize_function, batched=True)
