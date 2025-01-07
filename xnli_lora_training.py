@@ -88,7 +88,7 @@ def preprocess_dataset(dataset, tokenizer):
     
     tokenized_dataset = prompt_dataset.map(tokenize_function, batched=True)
 
-    tokenized_dataset.set_format(type='torch', columns=['input_ids', 'attention_mask', 'labels'])
+    tokenized_dataset.set_format(type='torch', columns=['input_ids', 'attention_mask', 'label'])
 
     return tokenized_dataset
 
