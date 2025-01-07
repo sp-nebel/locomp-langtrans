@@ -64,11 +64,12 @@ Requirement already satisfied: python-dateutil>=2.8.2 in /pfs/data5/software_uc2
 Requirement already satisfied: pytz>=2020.1 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from pandas->evaluate->-r requirements.txt (line 2)) (2024.2)
 Requirement already satisfied: tzdata>=2022.7 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from pandas->evaluate->-r requirements.txt (line 2)) (2024.2)
 Requirement already satisfied: six>=1.5 in /pfs/data5/software_uc2/bwhpc/common/devel/miniconda/23.9.0-py3.9.15/lib/python3.9/site-packages (from python-dateutil>=2.8.2->pandas->evaluate->-r requirements.txt (line 2)) (1.16.0)
+Map:   0%|          | 0/10 [00:00<?, ? examples/s]Map: 100%|██████████| 10/10 [00:00<00:00, 15.91 examples/s]Map: 100%|██████████| 10/10 [00:00<00:00, 15.82 examples/s]
 Detected kernel version 4.18.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
   0%|          | 0/2 [00:00<?, ?it/s]Traceback (most recent call last):
-  File "/pfs/data5/home/kit/stud/usxcp/mini-decoder-adaptation/xnli_lora_training.py", line 119, in <module>
+  File "/pfs/data5/home/kit/stud/usxcp/mini-decoder-adaptation/xnli_lora_training.py", line 143, in <module>
     run_training_experiment()
-  File "/pfs/data5/home/kit/stud/usxcp/mini-decoder-adaptation/xnli_lora_training.py", line 114, in run_training_experiment
+  File "/pfs/data5/home/kit/stud/usxcp/mini-decoder-adaptation/xnli_lora_training.py", line 138, in run_training_experiment
     trainer.train()
   File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/transformers/trainer.py", line 2123, in train
     return inner_training_loop(
@@ -108,14 +109,14 @@ RuntimeError: chunk expects at least a 1-dimensional tensor
 ============================= JOB FEEDBACK =============================
 
 NodeName=uc2n520
-Job ID: 25102672
+Job ID: 25104528
 Cluster: uc2
 User/Group: usxcp/stud
 State: COMPLETED (exit code 0)
 Nodes: 1
 Cores per node: 20
-CPU Utilized: 00:00:13
-CPU Efficiency: 0.43% of 00:50:40 core-walltime
-Job Wall-clock time: 00:02:32
-Memory Utilized: 5.13 GB
-Memory Efficiency: 4.01% of 128.00 GB
+CPU Utilized: 00:00:17
+CPU Efficiency: 0.44% of 01:04:40 core-walltime
+Job Wall-clock time: 00:03:14
+Memory Utilized: 2.97 GB
+Memory Efficiency: 4.65% of 64.00 GB
