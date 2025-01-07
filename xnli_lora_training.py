@@ -77,7 +77,7 @@ def preprocess_dataset(dataset, tokenizer):
     )
 
     def tokenize_function(examples):
-        prompts = [create_prompt(p, h) for p, h in zip(examples['premise'], examples['hypothesis'])]
+        prompts = [examples['prompt']]
         
         # Add padding and truncation
         model_inputs = tokenizer(
