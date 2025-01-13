@@ -1,6 +1,6 @@
 from datasets import load_dataset
 from evaluate import load
-from transformers import AutoTokenizer, AutoModelForCausalLM, TrainingArguments, Trainer
+from transformers import AutoTokenizer, AutoModelForCausalLM, TrainingArguments, Trainer, DataCollatorForLanguageModeling
 from peft import LoraConfig, get_peft_model
 import torch
 
@@ -113,6 +113,7 @@ def run_training_experiment():
     tokenizer.pad_token = tokenizer.eos_token
     xnlis = prepare_tokenized_xnlis(tokenizer)
     model = setup_peft_model(model_name, lora_config)
+    data_collator = DataCollatorForLanguageModeling(tokenizer=tokenizer, mlm=False)
     
     training_args.dataloader_pin_memory = False
     training_args.data_parallel_backend = False
@@ -125,7 +126,8 @@ def run_training_experiment():
         args=training_args,
         compute_metrics=compute_metrics,
         train_dataset=xnlis['train'],
-        eval_dataset=xnlis['test']
+        eval_dataset=xnlis['test'],
+        data_collator=data_collator
     )
     
     trainer.train()
