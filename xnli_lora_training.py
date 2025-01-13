@@ -49,8 +49,6 @@ training_args = TrainingArguments(
     output_dir=f'{model_name}_xnli_lora',
     learning_rate=5e-4,
     num_train_epochs=1,
-    per_device_train_batch_size=4,
-    per_device_eval_batch_size=2,
     save_total_limit=3,
     eval_strategy='epoch',
     logging_steps=5,
@@ -103,7 +101,7 @@ def setup_peft_model(model_name, config):
     return lora_model
 
 def compute_metrics(eval_pred):
-    #TODO: Implement this
+    xnli_metric.compute(predictions=eval_pred.predictions, references=eval_pred.label_ids)
     pass
 
 def run_training_experiment():
