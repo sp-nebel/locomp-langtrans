@@ -65,51 +65,111 @@ Requirement already satisfied: pytz>=2020.1 in /pfs/data5/home/kit/stud/usxcp/.l
 Requirement already satisfied: tzdata>=2022.7 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from pandas->evaluate->-r requirements.txt (line 2)) (2024.2)
 Requirement already satisfied: six>=1.5 in /pfs/data5/software_uc2/bwhpc/common/devel/miniconda/23.9.0-py3.9.15/lib/python3.9/site-packages (from python-dateutil>=2.8.2->pandas->evaluate->-r requirements.txt (line 2)) (1.16.0)
 Detected kernel version 4.18.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
-  0%|          | 0/3 [00:00<?, ?it/s]Traceback (most recent call last):
-  File "/pfs/data5/home/kit/stud/usxcp/mini-decoder-adaptation/xnli_lora_training.py", line 132, in <module>
+  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:05<00:05,  5.40s/it]100%|██████████| 2/2 [00:05<00:00,  2.37s/it]
+  0%|          | 0/1 [00:00<?, ?it/s][ATraceback (most recent call last):
+  File "/pfs/data5/home/kit/stud/usxcp/mini-decoder-adaptation/xnli_lora_training.py", line 138, in <module>
     run_training_experiment()
-  File "/pfs/data5/home/kit/stud/usxcp/mini-decoder-adaptation/xnli_lora_training.py", line 127, in run_training_experiment
+  File "/pfs/data5/home/kit/stud/usxcp/mini-decoder-adaptation/xnli_lora_training.py", line 133, in run_training_experiment
     trainer.train()
   File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/transformers/trainer.py", line 2123, in train
     return inner_training_loop(
-  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/transformers/trainer.py", line 2481, in _inner_training_loop
-    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
-  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/transformers/trainer.py", line 3579, in training_step
-    loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
-  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/transformers/trainer.py", line 3633, in compute_loss
-    outputs = model(**inputs)
-  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/peft/peft_model.py", line 849, in forward
-    return self.get_base_model()(*args, **kwargs)
-  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/transformers/models/llama/modeling_llama.py", line 1214, in forward
-    loss = self.loss_function(logits=logits, labels=labels, vocab_size=self.config.vocab_size, **loss_kwargs)
-  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/transformers/loss/loss_utils.py", line 46, in ForCausalLMLoss
-    loss = fixed_cross_entropy(shift_logits, shift_labels, num_items_in_batch, ignore_index, **kwargs)
-  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/transformers/loss/loss_utils.py", line 26, in fixed_cross_entropy
-    loss = nn.functional.cross_entropy(source, target, ignore_index=ignore_index, reduction=reduction)
-  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/torch/nn/functional.py", line 3479, in cross_entropy
-    return torch._C._nn.cross_entropy_loss(
-ValueError: Expected input batch_size (2044) to match target batch_size (3).
-  0%|          | 0/3 [00:08<?, ?it/s]
+  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/transformers/trainer.py", line 2573, in _inner_training_loop
+    self._maybe_log_save_evaluate(tr_loss, grad_norm, model, trial, epoch, ignore_keys_for_eval)
+  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/transformers/trainer.py", line 3004, in _maybe_log_save_evaluate
+    metrics = self._evaluate(trial, ignore_keys_for_eval)
+  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/transformers/trainer.py", line 2958, in _evaluate
+    metrics = self.evaluate(ignore_keys=ignore_keys_for_eval)
+  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/transformers/trainer.py", line 3975, in evaluate
+    output = eval_loop(
+  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/transformers/trainer.py", line 4264, in evaluation_loop
+    metrics = self.compute_metrics(
+  File "/pfs/data5/home/kit/stud/usxcp/mini-decoder-adaptation/xnli_lora_training.py", line 108, in compute_metrics
+    xnli_metric.compute(predictions=eval_pred.predictions, references=eval_pred.label_ids)
+  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/evaluate/module.py", line 455, in compute
+    self.add_batch(**inputs)
+  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/evaluate/module.py", line 546, in add_batch
+    raise ValueError(error_msg) from None
+ValueError: Predictions and/or references don't match the expected format.
+Expected format: {'predictions': Value(dtype='int64', id=None), 'references': Value(dtype='int64', id=None)},
+Input predictions: [[[ 2.8350658   3.582805    7.025703   ... -1.2479622  -1.2478637
+   -1.247749  ]
+  [ 2.8350651   3.5828042   7.0257044  ... -1.2479621  -1.2478637
+   -1.2477489 ]
+  [-2.099439   -0.23878255  1.1134876  ...  0.09565462  0.09561656
+    0.09541215]
+  ...
+  [-4.834404   -4.5986614  -4.9299254  ...  4.1669025   4.1659408
+    4.1660953 ]
+  [-4.7288046  -4.669228   -4.921017   ...  4.053287    4.0523014
+    4.052453  ]
+  [-4.7812443  -4.80491    -5.02969    ...  3.9359117   3.934936
+    3.935103  ]]],
+Input references: [[128000 128000 128006   9125 128007    198   6396     25   3308   1463
+     279   5133   1990   1403  23719    320   1762  74306    323  31178
+    3677  27099    512     12   1472  28832   6013    449   4154   6966
+    9109  25002    315   1521   9382     25    330    306    607    479
+     498    330   8386    329   2538    498    330  60668    702     12
+    9503   4276   2997    904   1023   4339     11  62603     11    477
+   41941    198     12   9503   4276    923    502   8128    477  12908
+    1603     14  10924    279   2440    271  13617    220     16    512
+   42562   1082     25    578   8415    374  21811    627     39  60400
+   13491     25    578  10065    374  41219    627   5207     25  87092
+     479    271  13617    220     17    512  42562   1082     25    578
+   13180    374   6437    627     39  60400  13491     25    578  13180
+     374   2579    627   5207     25  50859    271  13617    220     18
+     512  42562   1082     25    578    893    374  11689    627     39
+   60400  13491     25   1283    374  12512    264   9072    627   5207
+      25  21277    198   -100 128006    882 128007    198   7184  49229
+     512  42562   1082     25    480    954    323  59730  16853     39
+   60400  13491     25    473   1430  49300     82  16853   5207     25
+     220   -100 128006  78191 128007   -100   -100   -100   -100   -100
+    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
+    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
+    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
+    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
+    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
+    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
+    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
+    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
+    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
+    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
+    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
+    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
+    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
+    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
+    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
+    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
+    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
+    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
+    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
+    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
+    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
+    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
+    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
+    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
+    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
+    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
+    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
+    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
+    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
+    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
+    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
+    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
+    -100   -100]]
+100%|██████████| 2/2 [00:06<00:00,  3.47s/it]
 
+                                     [A
 ============================= JOB FEEDBACK =============================
 
 NodeName=uc2n520
-Job ID: 25105556
+Job ID: 25138561
 Cluster: uc2
 User/Group: usxcp/stud
 State: COMPLETED (exit code 0)
 Nodes: 1
 Cores per node: 20
-CPU Utilized: 00:00:13
-CPU Efficiency: 0.81% of 00:26:40 core-walltime
-Job Wall-clock time: 00:01:20
-Memory Utilized: 3.62 GB
-Memory Efficiency: 11.30% of 32.00 GB
+CPU Utilized: 00:00:14
+CPU Efficiency: 1.27% of 00:18:20 core-walltime
+Job Wall-clock time: 00:00:55
+Memory Utilized: 1.35 GB
+Memory Efficiency: 4.22% of 32.00 GB
