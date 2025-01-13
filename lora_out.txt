@@ -64,12 +64,11 @@ Requirement already satisfied: python-dateutil>=2.8.2 in /pfs/data5/software_uc2
 Requirement already satisfied: pytz>=2020.1 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from pandas->evaluate->-r requirements.txt (line 2)) (2024.2)
 Requirement already satisfied: tzdata>=2022.7 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from pandas->evaluate->-r requirements.txt (line 2)) (2024.2)
 Requirement already satisfied: six>=1.5 in /pfs/data5/software_uc2/bwhpc/common/devel/miniconda/23.9.0-py3.9.15/lib/python3.9/site-packages (from python-dateutil>=2.8.2->pandas->evaluate->-r requirements.txt (line 2)) (1.16.0)
-Map:   0%|          | 0/10 [00:00<?, ? examples/s]Map: 100%|██████████| 10/10 [00:00<00:00, 15.91 examples/s]Map: 100%|██████████| 10/10 [00:00<00:00, 15.82 examples/s]
 Detected kernel version 4.18.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
-  0%|          | 0/2 [00:00<?, ?it/s]Traceback (most recent call last):
-  File "/pfs/data5/home/kit/stud/usxcp/mini-decoder-adaptation/xnli_lora_training.py", line 143, in <module>
+  0%|          | 0/3 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "/pfs/data5/home/kit/stud/usxcp/mini-decoder-adaptation/xnli_lora_training.py", line 132, in <module>
     run_training_experiment()
-  File "/pfs/data5/home/kit/stud/usxcp/mini-decoder-adaptation/xnli_lora_training.py", line 138, in run_training_experiment
+  File "/pfs/data5/home/kit/stud/usxcp/mini-decoder-adaptation/xnli_lora_training.py", line 127, in run_training_experiment
     trainer.train()
   File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/transformers/trainer.py", line 2123, in train
     return inner_training_loop(
@@ -83,40 +82,34 @@ Detected kernel version 4.18.0, which is below the recommended minimum of 5.5.0;
     return self._call_impl(*args, **kwargs)
   File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
     return forward_call(*args, **kwargs)
-  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/torch/nn/parallel/data_parallel.py", line 183, in forward
-    inputs, module_kwargs = self.scatter(inputs, kwargs, self.device_ids)
-  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/torch/nn/parallel/data_parallel.py", line 207, in scatter
-    return scatter_kwargs(inputs, kwargs, device_ids, dim=self.dim)
-  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/torch/nn/parallel/scatter_gather.py", line 89, in scatter_kwargs
-    scattered_kwargs = scatter(kwargs, target_gpus, dim) if kwargs else []
-  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/torch/nn/parallel/scatter_gather.py", line 75, in scatter
-    res = scatter_map(inputs)
-  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/torch/nn/parallel/scatter_gather.py", line 66, in scatter_map
-    return [type(obj)(i) for i in zip(*map(scatter_map, obj.items()))]
-  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/torch/nn/parallel/scatter_gather.py", line 62, in scatter_map
-    return list(zip(*map(scatter_map, obj)))
-  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/torch/nn/parallel/scatter_gather.py", line 58, in scatter_map
-    return Scatter.apply(target_gpus, None, dim, obj)
-  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/torch/autograd/function.py", line 575, in apply
-    return super().apply(*args, **kwargs)  # type: ignore[misc]
-  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/torch/nn/parallel/_functions.py", line 104, in forward
-    outputs = comm.scatter(input, target_gpus, chunk_sizes, ctx.dim, streams)
-  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/torch/nn/parallel/comm.py", line 205, in scatter
-    return tuple(torch._C._scatter(tensor, devices, chunk_sizes, dim, streams))
-RuntimeError: chunk expects at least a 1-dimensional tensor
-  0%|          | 0/2 [00:03<?, ?it/s]
+  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/peft/peft_model.py", line 849, in forward
+    return self.get_base_model()(*args, **kwargs)
+  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/transformers/models/llama/modeling_llama.py", line 1214, in forward
+    loss = self.loss_function(logits=logits, labels=labels, vocab_size=self.config.vocab_size, **loss_kwargs)
+  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/transformers/loss/loss_utils.py", line 46, in ForCausalLMLoss
+    loss = fixed_cross_entropy(shift_logits, shift_labels, num_items_in_batch, ignore_index, **kwargs)
+  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/transformers/loss/loss_utils.py", line 26, in fixed_cross_entropy
+    loss = nn.functional.cross_entropy(source, target, ignore_index=ignore_index, reduction=reduction)
+  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/torch/nn/functional.py", line 3479, in cross_entropy
+    return torch._C._nn.cross_entropy_loss(
+ValueError: Expected input batch_size (2044) to match target batch_size (3).
+  0%|          | 0/3 [00:08<?, ?it/s]
 
 ============================= JOB FEEDBACK =============================
 
 NodeName=uc2n520
-Job ID: 25104528
+Job ID: 25105556
 Cluster: uc2
 User/Group: usxcp/stud
 State: COMPLETED (exit code 0)
 Nodes: 1
 Cores per node: 20
-CPU Utilized: 00:00:17
-CPU Efficiency: 0.44% of 01:04:40 core-walltime
-Job Wall-clock time: 00:03:14
-Memory Utilized: 2.97 GB
-Memory Efficiency: 4.65% of 64.00 GB
+CPU Utilized: 00:00:13
+CPU Efficiency: 0.81% of 00:26:40 core-walltime
+Job Wall-clock time: 00:01:20
+Memory Utilized: 3.62 GB
+Memory Efficiency: 11.30% of 32.00 GB
