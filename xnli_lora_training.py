@@ -56,6 +56,8 @@ training_args = TrainingArguments(
     logging_steps=5,
     remove_unused_columns=True,
     logging_dir='./logs',
+    per_device_train_batch_size=8,
+    per_device_eval_batch_size=8,
 )
 
 xnli_metric = load('xnli')
