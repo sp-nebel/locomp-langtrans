@@ -42,7 +42,8 @@ lora_config = LoraConfig(
     lora_dropout=0.1,
     bias='lora_only',
     use_rslora=True,
-    modules_to_save=["decode_head"]
+    modules_to_save=["decode_head"],
+    task_type='CAUSAL_LM',
 )
 
 training_args = TrainingArguments(
