@@ -89,7 +89,10 @@ def preprocess_dataset(dataset, tokenizer):
     
     tokenized_dataset = prompt_dataset.map(tokenize_function, batched=True)
 
-    tokenized_dataset.set_format(type='torch', columns=['input_ids', 'attention_mask', 'label'])
+    tokenized_dataset = tokenized_dataset.remove_columns(['prompt'])
+    tokenized_dataset = tokenized_dataset.rename_column('label', 'labels')
+
+    tokenized_dataset.set_format(type='torch', columns=['input_ids', 'attention_mask', 'labels'])
 
     return tokenized_dataset
 
