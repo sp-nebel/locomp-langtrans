@@ -84,15 +84,10 @@ def preprocess_dataset(dataset, tokenizer):
         
         return model_inputs
     
-    def label_function(examples):
-        labels = ['entailment' if label == 0 else 'contradiction' if label == 2 else 'neutral' 
-                 for label in examples['label']]
-        return {'labels': labels}
     
     tokenized_dataset = prompt_dataset.map(tokenize_function, batched=True)
-    tokenized_dataset = tokenized_dataset.map(label_function, batched=True)
-
-    tokenized_dataset = tokenized_dataset.remove_columns(['prompt', 'label'])
+    tokenized_dataset = tokenized_dataset.rename_column('label', 'labels')
+    tokenized_dataset = tokenized_dataset.remove_columns(['prompt'])
 
     tokenized_dataset.set_format(type='torch', columns=['input_ids', 'attention_mask', 'labels'])
 
