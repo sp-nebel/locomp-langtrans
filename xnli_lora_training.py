@@ -1,5 +1,4 @@
 from datasets import load_dataset
-from evaluate import load
 from transformers import AutoTokenizer, AutoModelForCausalLM, TrainingArguments, Trainer, DataCollatorForLanguageModeling
 from peft import LoraConfig, get_peft_model
 import torch
@@ -59,8 +58,6 @@ training_args = TrainingArguments(
     per_device_eval_batch_size=8,
 )
 
-xnli_metric = load('xnli')
-
 def prepare_tokenized_xnlis(tokenizer):
     xnli = load_dataset('xnli', 'en', split='train[:10]', streaming=False)
     xnli = preprocess_dataset(xnli, tokenizer)
@@ -87,10 +84,15 @@ def preprocess_dataset(dataset, tokenizer):
         
         return model_inputs
     
+    def label_function(examples):
+        labels = ['entailment' if label == 0 else 'contradiction' if label == 2 else 'neutral' 
+                 for label in examples['label']]
+        return {'labels': labels}
+    
     tokenized_dataset = prompt_dataset.map(tokenize_function, batched=True)
+    tokenized_dataset = tokenized_dataset.map(label_function, batched=True)
 
-    tokenized_dataset = tokenized_dataset.remove_columns(['prompt'])
-    tokenized_dataset = tokenized_dataset.rename_column('label', 'labels')
+    tokenized_dataset = tokenized_dataset.remove_columns(['prompt', 'label'])
 
     tokenized_dataset.set_format(type='torch', columns=['input_ids', 'attention_mask', 'labels'])
 
@@ -105,8 +107,11 @@ def setup_peft_model(model_name, config):
     return lora_model
 
 def compute_metrics(eval_pred):
-    xnli_metric.compute(predictions=eval_pred.predictions, references=eval_pred.label_ids)
-    pass
+    #TODO compute accuracy
+    predictions = eval_pred.predictions.argmax(-1)
+    labels = eval_pred.label_ids
+    accuracy = (predictions == labels).mean()
+    return {"accuracy": accuracy}
 
 def run_training_experiment():
     tokenizer = AutoTokenizer.from_pretrained(model_name)
