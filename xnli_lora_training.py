@@ -35,6 +35,10 @@ Output: <|eot_id|><|start_header_id|>assistant<|end_header_id|>'''
 
 model_name = "meta-llama/Llama-3.2-1B-Instruct"
 
+entailment_ids = {306, 607, 479}
+contradiction_ids = {8386, 329, 2538}
+neutral_ids = {60668}
+
 lora_config = LoraConfig(
     r=8,
     lora_alpha=16,
@@ -46,7 +50,7 @@ lora_config = LoraConfig(
 )
 
 training_args = TrainingArguments(
-    output_dir=f'{model_name}_xnli_lora',
+    output_dir=f'./xnli_lora_output',
     learning_rate=5e-4,
     num_train_epochs=1,
     save_total_limit=3,
@@ -102,11 +106,32 @@ def setup_peft_model(model_name, config):
     return lora_model
 
 def compute_metrics(eval_pred):
-    #TODO compute accuracy
-    predictions = eval_pred.predictions.argmax(-1)
+    predictions = eval_pred.predictions
     labels = eval_pred.label_ids
-    accuracy = (predictions == labels).mean()
-    return {"accuracy": accuracy}
+    
+    # Get the predicted token sequences
+    pred_tokens = torch.argmax(predictions, dim=-1)
+    
+    # Define the token ids for each label above
+    #[[128000, 306, 607, 479], [128000, 8386, 329, 2538], [128000, 60668]]
+    #'entailment', 'contradiction', 'neutral'
+    #128000 = begin of sentence
+    
+    correct = 0
+    total = len(labels)
+    
+    for pred, label in zip(pred_tokens, labels):
+        # Convert prediction to set for intersection
+        pred_set = set(pred.tolist())
+        if label == 0 and entailment_ids.intersection(pred_set):
+            correct += 1
+        elif label == 1 and contradiction_ids.intersection(pred_set):
+            correct += 1
+        elif label == 2 and neutral_ids.intersection(pred_set):
+            correct += 1
+            
+    return {"accuracy": correct / total}
+    
 
 def run_training_experiment():
     tokenizer = AutoTokenizer.from_pretrained(model_name)
@@ -132,7 +157,7 @@ def run_training_experiment():
     
     trainer.train()
 
-    model.save_pretrained(f'{model_name}_xnli_lora')
+    model.save_pretrained(f'./{model_name}_xnli_lora')
 
 if __name__ == '__main__':
     run_training_experiment()

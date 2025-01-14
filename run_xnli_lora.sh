@@ -11,6 +11,6 @@
 
 module load devel/miniconda
 conda activate llama_test_env
-pip install -r requirements.txt
+#pip install -r requirements.txt
 python3 xnli_lora_training.py
 conda deactivate
