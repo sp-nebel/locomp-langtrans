@@ -112,8 +112,7 @@ def compute_metrics(eval_pred):
     print(predictions)
     print(labels)
     tokenizer = AutoTokenizer.from_pretrained(model_name)
-    cleaned_labels= np.where(labels[0] != -100, labels[0], tokenizer.pad_token_id)
-    words = tokenizer.batch_decode(cleaned_labels, skip_special_tokens=True, clean_up_tokenization_spaces=True)
+    words = tokenizer.convert_ids_to_tokens(labels[0])
     print(words)
     
     # Get the predicted token sequences
