@@ -106,7 +106,7 @@ def setup_peft_model(model_name, config):
     return lora_model
 
 def compute_metrics(eval_pred):
-    predictions = eval_pred.predictions
+    predictions = torch.from_numpy(eval_pred.predictions)
     labels = eval_pred.label_ids
     
     # Get the predicted token sequences
