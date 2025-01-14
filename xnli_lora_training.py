@@ -110,7 +110,7 @@ def compute_metrics(eval_pred):
     labels = eval_pred.label_ids
     print(predictions)
     print(labels)
-    print(AutoTokenizer.from_pretrained(model_name).decode(torch.tensor(labels)))
+    print(AutoTokenizer.from_pretrained(model_name).decode(torch.tensor(labels).flatten()))
     
     # Get the predicted token sequences
     pred_tokens = torch.argmax(predictions, dim=-1)
