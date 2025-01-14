@@ -108,6 +108,8 @@ def setup_peft_model(model_name, config):
 def compute_metrics(eval_pred):
     predictions = torch.from_numpy(eval_pred.predictions)
     labels = eval_pred.label_ids
+    print(predictions)
+    print(labels)
     
     # Get the predicted token sequences
     pred_tokens = torch.argmax(predictions, dim=-1)
