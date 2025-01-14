@@ -1,4 +1,5 @@
 from datasets import load_dataset
+import numpy as np
 from transformers import AutoTokenizer, AutoModelForCausalLM, TrainingArguments, Trainer, DataCollatorForLanguageModeling
 from peft import LoraConfig, get_peft_model
 import torch
@@ -110,7 +111,10 @@ def compute_metrics(eval_pred):
     labels = eval_pred.label_ids
     print(predictions)
     print(labels)
-    print(AutoTokenizer.from_pretrained(model_name).decode(torch.tensor(labels).flatten()))
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    cleaned_labels= np.where(labels != -100, labels, tokenizer.pad_token_id)
+    words = tokenizer.batch_decode(cleaned_labels, skip_special_tokens=True, clean_up_tokenization_spaces=True)
+    print(words)
     
     # Get the predicted token sequences
     pred_tokens = torch.argmax(predictions, dim=-1)
