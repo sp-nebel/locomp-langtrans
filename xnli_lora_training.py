@@ -123,11 +123,11 @@ def compute_metrics(eval_pred):
     for pred, label in zip(pred_tokens, labels):
         # Convert prediction to set for intersection
         pred_set = set(pred.tolist())
-        if label == 0 and entailment_ids.intersection(pred_set):
+        if label == 0 and entailment_ids.issubset(pred_set):
             correct += 1
-        elif label == 1 and contradiction_ids.intersection(pred_set):
+        elif label == 1 and neutral_ids.issubset(pred_set):
             correct += 1
-        elif label == 2 and neutral_ids.intersection(pred_set):
+        elif label == 2 and contradiction_ids.issubset(pred_set):
             correct += 1
             
     return {"accuracy": correct / total}
