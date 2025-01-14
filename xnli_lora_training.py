@@ -112,7 +112,8 @@ def compute_metrics(eval_pred):
     print(predictions)
     print(labels)
     tokenizer = AutoTokenizer.from_pretrained(model_name)
-    words = tokenizer.convert_ids_to_tokens(labels[0])
+    labels = [tokenizer.pad_token_id if label == -100 else label for label in labels[0]]
+    words = tokenizer.convert_ids_to_tokens(labels)
     print(words)
     
     # Get the predicted token sequences
