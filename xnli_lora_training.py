@@ -112,11 +112,6 @@ def compute_metrics(eval_pred):
     # Get the predicted token sequences
     pred_tokens = torch.argmax(predictions, dim=-1)
     
-    # Define the token ids for each label above
-    #[[128000, 306, 607, 479], [128000, 8386, 329, 2538], [128000, 60668]]
-    #'entailment', 'contradiction', 'neutral'
-    #128000 = begin of sentence
-    
     correct = 0
     total = len(labels)
     
