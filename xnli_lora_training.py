@@ -102,8 +102,6 @@ def run_training_experiment():
     model = setup_peft_model(model_name, lora_config)
     data_collator = DataCollatorForLanguageModeling(tokenizer=tokenizer, mlm=False)
     
-    training_args.dataloader_pin_memory = False
-    training_args.data_parallel_backend = False
 
     if torch.cuda.is_available():
         model.cuda()
