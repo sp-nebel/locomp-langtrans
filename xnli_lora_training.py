@@ -62,9 +62,9 @@ def preprocess_dataset(dataset, tokenizer):
     def tokenize_function(examples):
         model_inputs = tokenizer(
             examples['prompt'],
-            padding='max_length',
+            padding=True,
             truncation=True,
-            return_tensors='pt',
+            max_length=512,
         )
         model_inputs['labels'] = model_inputs['input_ids'].copy()
         return model_inputs
@@ -100,7 +100,7 @@ def run_training_experiment():
     tokenizer.pad_token = tokenizer.eos_token
     xnlis = prepare_tokenized_xnlis(tokenizer)
     model = setup_peft_model(model_name, lora_config)
-    data_collator = DataCollatorForLanguageModeling(tokenizer=tokenizer, mlm=False)
+    data_collator = DataCollatorForLanguageModeling(tokenizer=tokenizer, mlm=False, pad_to_multiple_of=8)
     
 
     if torch.cuda.is_available():
