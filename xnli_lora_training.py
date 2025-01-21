@@ -51,7 +51,7 @@ training_args = TrainingArguments(
 def prepare_tokenized_xnlis(tokenizer):
     xnli = load_dataset('xnli', 'en', streaming=False)
     xnli = preprocess_dataset(xnli, tokenizer)
-    xnlis = xnli['train'], xnli['validation']
+    xnlis = xnli.train_test_split(test_size=0.1)
     return xnlis
 
 def preprocess_dataset(dataset, tokenizer):
@@ -110,7 +110,7 @@ def run_training_experiment():
         model=model,
         args=training_args,
         train_dataset=xnlis['train'],
-        eval_dataset=xnlis['validation'],
+        eval_dataset=xnlis['test'],
         data_collator=data_collator
     )
     
