@@ -110,7 +110,7 @@ def run_training_experiment():
         model=model,
         args=training_args,
         train_dataset=xnlis['train'],
-        eval_dataset=xnlis['test'],
+        eval_dataset=xnlis['validation'],
         data_collator=data_collator
     )
     
