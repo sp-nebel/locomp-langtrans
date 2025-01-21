@@ -1,8 +1,8 @@
 #!/bin/bash
 #SBATCH --partition=gpu_4
 #SBATCH --ntasks=40
-#SBATCH --time=01:00:00
-#SBATCH --mem=64gb
+#SBATCH --time=00:20:00
+#SBATCH --mem=32gb
 #SBATCH --gres=gpu:1
 #SBATCH --mail-user=usxcp@student.kit.edu
 #SBATCH --mail-type=ALL
