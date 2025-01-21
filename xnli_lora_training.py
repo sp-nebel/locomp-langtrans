@@ -19,7 +19,7 @@ Hypothesis: {hypothesis}
 Output: <|eot_id|><|start_header_id|>assistant<|end_header_id|>
 {label}'''
 
-model_name = "meta-llama/Llama-3.2-1B-Instruct"
+model_name = "meta-llama/Llama-3.2-3B-Instruct"
 
 entailment_id = 0
 contradiction_id = 2
@@ -38,7 +38,7 @@ lora_config = LoraConfig(
 training_args = TrainingArguments(
     output_dir=f'./xnli_lora_output',
     learning_rate=5e-4,
-    num_train_epochs=1,
+    num_train_epochs=5,
     save_total_limit=3,
     eval_strategy='epoch',
     logging_steps=5,
@@ -49,9 +49,9 @@ training_args = TrainingArguments(
 )
 
 def prepare_tokenized_xnlis(tokenizer):
-    xnli = load_dataset('xnli', 'en', split='train[:10]', streaming=False)
+    xnli = load_dataset('xnli', 'en', streaming=False)
     xnli = preprocess_dataset(xnli, tokenizer)
-    xnlis = xnli.train_test_split(test_size=0.1)
+    xnlis = xnli['train'], xnli['validation']
     return xnlis
 
 def preprocess_dataset(dataset, tokenizer):

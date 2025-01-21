@@ -1,9 +1,9 @@
 #!/bin/bash
 #SBATCH --partition=gpu_4
 #SBATCH --ntasks=40
-#SBATCH --time=00:30:00
+#SBATCH --time=01:00:00
 #SBATCH --mem=64gb
-#SBATCH --gres=gpu:2
+#SBATCH --gres=gpu:1
 #SBATCH --mail-user=usxcp@student.kit.edu
 #SBATCH --mail-type=ALL
 #SBATCH --job-name=lora_job
