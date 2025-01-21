@@ -49,10 +49,11 @@ training_args = TrainingArguments(
 )
 
 def prepare_tokenized_xnlis(tokenizer):
-    xnli = load_dataset('xnli', 'en', streaming=False)
-    xnli = preprocess_dataset(xnli, tokenizer)
-    xnlis = xnli.train_test_split(test_size=0.1)
-    return xnlis
+    xnli_train = load_dataset('xnli', 'en', split='train[:2]', streaming=False)
+    xnli_validation = load_dataset('xnli', 'en', split='validation[:2]', streaming=False)
+    xnli_train = preprocess_dataset(xnli_train, tokenizer)
+    xnli_validation = preprocess_dataset(xnli_validation, tokenizer)
+    return {'train': xnli_train, 'test': xnli_validation}
 
 def preprocess_dataset(dataset, tokenizer):
     def create_prompt_dict(example):
