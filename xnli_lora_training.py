@@ -101,7 +101,7 @@ def run_training_experiment():
     tokenizer.pad_token = tokenizer.eos_token
     xnlis = prepare_tokenized_xnlis(tokenizer)
     model = setup_peft_model(model_name, lora_config)
-    data_collator = DataCollatorForLanguageModeling(tokenizer=tokenizer, mlm=False, pad_to_multiple_of=8)
+    data_collator = DataCollatorForLanguageModeling(tokenizer=tokenizer, mlm=False)
     
 
     if torch.cuda.is_available():
