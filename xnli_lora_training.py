@@ -40,7 +40,7 @@ training_args = TrainingArguments(
     learning_rate=5e-4,
     num_train_epochs=5,
     save_total_limit=3,
-    eval_strategy='epoch',
+    evaluation_strategy='epoch',
     logging_steps=5,
     remove_unused_columns=True,
     logging_dir='./logs',
@@ -50,7 +50,6 @@ training_args = TrainingArguments(
 
 def prepare_tokenized_xnlis(tokenizer):
     xnli_train = load_dataset('xnli', 'en', split='train[:9]+validation[:1]', streaming=False)
-    keys = xnli_train.format.keys()
     xnli_train = preprocess_dataset(xnli_train, tokenizer)
     return xnli_train.train_test_split(test_size=0.1)
 
@@ -60,15 +59,22 @@ def preprocess_dataset(dataset, tokenizer):
         return {'prompt': prompt}
 
     def tokenize_function(examples):
-        model_inputs = tokenizer(
-            examples['prompt'],
-            padding=True,
-            truncation=True,
-            max_length=512,
-        )
-        model_inputs['labels'] = model_inputs['input_ids'].copy()
-        return model_inputs
-    
+      model_inputs = tokenizer(
+          examples['prompt'],
+          max_length=512,
+          truncation=True,
+          padding=True
+      )
+
+      labels = tokenizer(
+          examples['prompt'],
+          max_length=512,
+          truncation=True,
+          padding=True
+      )
+      model_inputs['labels'] = labels['input_ids']
+      return model_inputs
+
     prompt_dataset = dataset.map(
         create_prompt_dict,
         remove_columns=['premise', 'hypothesis', 'label']
@@ -90,22 +96,24 @@ def create_label_prompt(premise, hypothesis, label):
     return prompt_template.format(system_prompt=system_prompt, premise=premise, hypothesis=hypothesis, label=label)
 
 def setup_peft_model(model_name, config):
-    model = AutoModelForCausalLM.from_pretrained(model_name)
+    model = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype=torch.bfloat16)
     lora_model = get_peft_model(model, config)
     return lora_model
-    
 
 def run_training_experiment():
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     tokenizer.pad_token = tokenizer.eos_token
+    tokenizer.padding_side = 'right' 
+
     xnlis = prepare_tokenized_xnlis(tokenizer)
     model = setup_peft_model(model_name, lora_config)
-    data_collator = DataCollatorForLanguageModeling(tokenizer=tokenizer, mlm=False)
-    
 
-    if torch.cuda.is_available():
-        model.cuda()
-    
+    data_collator = DataCollatorForLanguageModeling(
+        tokenizer=tokenizer,
+        mlm=False,
+        pad_to_multiple_of=8
+    )
+
     trainer = Trainer(
         model=model,
         args=training_args,
@@ -113,7 +121,7 @@ def run_training_experiment():
         eval_dataset=xnlis['test'],
         data_collator=data_collator
     )
-    
+
     trainer.train()
 
     model.save_pretrained(f'./{model_name}_xnli_lora')
