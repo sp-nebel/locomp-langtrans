@@ -62,8 +62,8 @@ def preprocess_dataset(dataset, tokenizer):
       model_inputs = tokenizer(
           examples['prompt'],
           max_length=512,
-          truncation=True,
-          padding=True
+          truncation='max_length',
+          padding='max_length',
       )
 
       model_inputs['labels'] = model_inputs['input_ids']
@@ -104,9 +104,8 @@ def run_training_experiment():
 
     data_collator = DataCollatorForLanguageModeling(
         tokenizer=tokenizer,
-        mlm=False,
-        pad_to_multiple_of=8
-    )
+        mlm=False
+        )
 
     trainer = Trainer(
         model=model,
