@@ -49,9 +49,9 @@ training_args = TrainingArguments(
 )
 
 def prepare_tokenized_xnlis(tokenizer):
-    xnli_train = load_dataset('xnli', 'en', split='train+test', streaming=False)
+    xnli_train = load_dataset('xnli', 'en', split='train[:9]+test[:1]', streaming=False)
     xnli_train = preprocess_dataset(xnli_train, tokenizer)
-    return xnli_train.train_test_split(train_size=392702, shuffle=False)
+    return xnli_train.train_test_split(train_size=0.9, shuffle=False)
 
 def preprocess_dataset(dataset, tokenizer):
     def create_prompt_dict(example):
@@ -66,13 +66,7 @@ def preprocess_dataset(dataset, tokenizer):
           padding=True
       )
 
-      labels = tokenizer(
-          examples['prompt'],
-          max_length=512,
-          truncation=True,
-          padding=True
-      )
-      model_inputs['labels'] = labels['input_ids']
+      model_inputs['labels'] = model_inputs['input_ids']
       return model_inputs
 
     prompt_dataset = dataset.map(
