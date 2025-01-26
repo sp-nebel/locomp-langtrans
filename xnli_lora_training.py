@@ -40,7 +40,7 @@ training_args = TrainingArguments(
     learning_rate=5e-4,
     num_train_epochs=5,
     save_total_limit=3,
-    evaluation_strategy='epoch',
+    eval_strategy='epoch',
     logging_steps=5,
     remove_unused_columns=True,
     logging_dir='./logs',
@@ -49,11 +49,9 @@ training_args = TrainingArguments(
 )
 
 def prepare_tokenized_xnlis(tokenizer):
-    xnli_train = load_dataset('xnli', 'en', split='train', streaming=False)
-    xnli_validation = load_dataset('xnli', 'en', split='validation', streaming=False)
+    xnli_train = load_dataset('xnli', 'en', split='train+test', streaming=False)
     xnli_train = preprocess_dataset(xnli_train, tokenizer)
-    xnli_validation = preprocess_dataset(xnli_validation, tokenizer)
-    return {'train': xnli_train, 'test': xnli_validation}
+    return xnli_train.train_test_split(train_size=392702, shuffle=False)
 
 def preprocess_dataset(dataset, tokenizer):
     def create_prompt_dict(example):
