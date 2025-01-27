@@ -1,175 +1,126 @@
 Defaulting to user installation because normal site-packages is not writeable
-Requirement already satisfied: torch in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from -r requirements.txt (line 1)) (2.5.1)
-Requirement already satisfied: evaluate in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from -r requirements.txt (line 2)) (0.4.3)
-Requirement already satisfied: datasets in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from -r requirements.txt (line 3)) (3.1.0)
-Requirement already satisfied: huggingface-hub in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from -r requirements.txt (line 4)) (0.26.3)
-Requirement already satisfied: transformers in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from -r requirements.txt (line 5)) (4.46.3)
-Requirement already satisfied: sacrebleu in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from -r requirements.txt (line 6)) (2.4.3)
-Requirement already satisfied: torchinfo in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from -r requirements.txt (line 7)) (1.8.0)
-Requirement already satisfied: peft in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from -r requirements.txt (line 8)) (0.14.0)
-Requirement already satisfied: filelock in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 1)) (3.16.1)
-Requirement already satisfied: typing-extensions>=4.8.0 in /pfs/data5/software_uc2/bwhpc/common/devel/miniconda/23.9.0-py3.9.15/lib/python3.9/site-packages (from torch->-r requirements.txt (line 1)) (4.8.0)
-Requirement already satisfied: networkx in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 1)) (3.2.1)
-Requirement already satisfied: jinja2 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 1)) (3.1.4)
-Requirement already satisfied: fsspec in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 1)) (2024.9.0)
-Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.4.127 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 1)) (12.4.127)
-Requirement already satisfied: nvidia-cuda-runtime-cu12==12.4.127 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 1)) (12.4.127)
-Requirement already satisfied: nvidia-cuda-cupti-cu12==12.4.127 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 1)) (12.4.127)
-Requirement already satisfied: nvidia-cudnn-cu12==9.1.0.70 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 1)) (9.1.0.70)
-Requirement already satisfied: nvidia-cublas-cu12==12.4.5.8 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 1)) (12.4.5.8)
-Requirement already satisfied: nvidia-cufft-cu12==11.2.1.3 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 1)) (11.2.1.3)
-Requirement already satisfied: nvidia-curand-cu12==10.3.5.147 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 1)) (10.3.5.147)
-Requirement already satisfied: nvidia-cusolver-cu12==11.6.1.9 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 1)) (11.6.1.9)
-Requirement already satisfied: nvidia-cusparse-cu12==12.3.1.170 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 1)) (12.3.1.170)
-Requirement already satisfied: nvidia-nccl-cu12==2.21.5 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 1)) (2.21.5)
-Requirement already satisfied: nvidia-nvtx-cu12==12.4.127 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 1)) (12.4.127)
-Requirement already satisfied: nvidia-nvjitlink-cu12==12.4.127 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 1)) (12.4.127)
-Requirement already satisfied: triton==3.1.0 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 1)) (3.1.0)
-Requirement already satisfied: sympy==1.13.1 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 1)) (1.13.1)
-Requirement already satisfied: mpmath<1.4,>=1.1.0 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from sympy==1.13.1->torch->-r requirements.txt (line 1)) (1.3.0)
-Requirement already satisfied: numpy>=1.17 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from evaluate->-r requirements.txt (line 2)) (2.0.2)
-Requirement already satisfied: dill in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from evaluate->-r requirements.txt (line 2)) (0.3.8)
-Requirement already satisfied: pandas in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from evaluate->-r requirements.txt (line 2)) (2.2.3)
-Requirement already satisfied: requests>=2.19.0 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from evaluate->-r requirements.txt (line 2)) (2.32.3)
-Requirement already satisfied: tqdm>=4.62.1 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from evaluate->-r requirements.txt (line 2)) (4.67.1)
-Requirement already satisfied: xxhash in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from evaluate->-r requirements.txt (line 2)) (3.5.0)
-Requirement already satisfied: multiprocess in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from evaluate->-r requirements.txt (line 2)) (0.70.16)
-Requirement already satisfied: packaging in /pfs/data5/software_uc2/bwhpc/common/devel/miniconda/23.9.0-py3.9.15/lib/python3.9/site-packages (from evaluate->-r requirements.txt (line 2)) (23.1)
-Requirement already satisfied: pyarrow>=15.0.0 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from datasets->-r requirements.txt (line 3)) (18.1.0)
-Requirement already satisfied: aiohttp in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from datasets->-r requirements.txt (line 3)) (3.11.9)
-Requirement already satisfied: pyyaml>=5.1 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from datasets->-r requirements.txt (line 3)) (6.0.2)
-Requirement already satisfied: regex!=2019.12.17 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from transformers->-r requirements.txt (line 5)) (2024.11.6)
-Requirement already satisfied: tokenizers<0.21,>=0.20 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from transformers->-r requirements.txt (line 5)) (0.20.3)
-Requirement already satisfied: safetensors>=0.4.1 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from transformers->-r requirements.txt (line 5)) (0.4.5)
-Requirement already satisfied: portalocker in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from sacrebleu->-r requirements.txt (line 6)) (3.0.0)
-Requirement already satisfied: tabulate>=0.8.9 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from sacrebleu->-r requirements.txt (line 6)) (0.9.0)
-Requirement already satisfied: colorama in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from sacrebleu->-r requirements.txt (line 6)) (0.4.6)
-Requirement already satisfied: lxml in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from sacrebleu->-r requirements.txt (line 6)) (5.3.0)
-Requirement already satisfied: psutil in /pfs/data5/software_uc2/bwhpc/common/devel/miniconda/23.9.0-py3.9.15/lib/python3.9/site-packages (from peft->-r requirements.txt (line 8)) (5.9.6)
-Requirement already satisfied: accelerate>=0.21.0 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from peft->-r requirements.txt (line 8)) (1.2.1)
-Requirement already satisfied: aiohappyeyeballs>=2.3.0 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from aiohttp->datasets->-r requirements.txt (line 3)) (2.4.4)
-Requirement already satisfied: aiosignal>=1.1.2 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from aiohttp->datasets->-r requirements.txt (line 3)) (1.3.1)
-Requirement already satisfied: async-timeout<6.0,>=4.0 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from aiohttp->datasets->-r requirements.txt (line 3)) (5.0.1)
-Requirement already satisfied: attrs>=17.3.0 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from aiohttp->datasets->-r requirements.txt (line 3)) (24.2.0)
-Requirement already satisfied: frozenlist>=1.1.1 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from aiohttp->datasets->-r requirements.txt (line 3)) (1.5.0)
-Requirement already satisfied: multidict<7.0,>=4.5 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from aiohttp->datasets->-r requirements.txt (line 3)) (6.1.0)
-Requirement already satisfied: propcache>=0.2.0 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from aiohttp->datasets->-r requirements.txt (line 3)) (0.2.1)
-Requirement already satisfied: yarl<2.0,>=1.17.0 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from aiohttp->datasets->-r requirements.txt (line 3)) (1.18.3)
-Requirement already satisfied: charset-normalizer<4,>=2 in /pfs/data5/software_uc2/bwhpc/common/devel/miniconda/23.9.0-py3.9.15/lib/python3.9/site-packages (from requests>=2.19.0->evaluate->-r requirements.txt (line 2)) (2.0.4)
-Requirement already satisfied: idna<4,>=2.5 in /pfs/data5/software_uc2/bwhpc/common/devel/miniconda/23.9.0-py3.9.15/lib/python3.9/site-packages (from requests>=2.19.0->evaluate->-r requirements.txt (line 2)) (3.4)
-Requirement already satisfied: urllib3<3,>=1.21.1 in /pfs/data5/software_uc2/bwhpc/common/devel/miniconda/23.9.0-py3.9.15/lib/python3.9/site-packages (from requests>=2.19.0->evaluate->-r requirements.txt (line 2)) (1.26.16)
-Requirement already satisfied: certifi>=2017.4.17 in /pfs/data5/software_uc2/bwhpc/common/devel/miniconda/23.9.0-py3.9.15/lib/python3.9/site-packages (from requests>=2.19.0->evaluate->-r requirements.txt (line 2)) (2023.7.22)
-Requirement already satisfied: MarkupSafe>=2.0 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from jinja2->torch->-r requirements.txt (line 1)) (3.0.2)
-Requirement already satisfied: python-dateutil>=2.8.2 in /pfs/data5/software_uc2/bwhpc/common/devel/miniconda/23.9.0-py3.9.15/lib/python3.9/site-packages (from pandas->evaluate->-r requirements.txt (line 2)) (2.8.2)
-Requirement already satisfied: pytz>=2020.1 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from pandas->evaluate->-r requirements.txt (line 2)) (2024.2)
-Requirement already satisfied: tzdata>=2022.7 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from pandas->evaluate->-r requirements.txt (line 2)) (2024.2)
-Requirement already satisfied: six>=1.5 in /pfs/data5/software_uc2/bwhpc/common/devel/miniconda/23.9.0-py3.9.15/lib/python3.9/site-packages (from python-dateutil>=2.8.2->pandas->evaluate->-r requirements.txt (line 2)) (1.16.0)
+Requirement already satisfied: numpy<2.0 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from -r requirements.txt (line 1)) (1.26.4)
+Requirement already satisfied: torch in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from -r requirements.txt (line 2)) (2.5.1)
+Requirement already satisfied: evaluate in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from -r requirements.txt (line 3)) (0.4.3)
+Requirement already satisfied: datasets in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from -r requirements.txt (line 4)) (3.1.0)
+Requirement already satisfied: huggingface-hub in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from -r requirements.txt (line 5)) (0.26.3)
+Requirement already satisfied: transformers in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from -r requirements.txt (line 6)) (4.46.3)
+Requirement already satisfied: sacrebleu in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from -r requirements.txt (line 7)) (2.4.3)
+Requirement already satisfied: torchinfo in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from -r requirements.txt (line 8)) (1.8.0)
+Requirement already satisfied: peft in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from -r requirements.txt (line 9)) (0.14.0)
+Requirement already satisfied: filelock in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 2)) (3.16.1)
+Requirement already satisfied: typing-extensions>=4.8.0 in /pfs/data5/software_uc2/bwhpc/common/devel/miniconda/23.9.0-py3.9.15/lib/python3.9/site-packages (from torch->-r requirements.txt (line 2)) (4.8.0)
+Requirement already satisfied: networkx in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 2)) (3.2.1)
+Requirement already satisfied: jinja2 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 2)) (3.1.4)
+Requirement already satisfied: fsspec in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 2)) (2024.9.0)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.4.127 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 2)) (12.4.127)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.4.127 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 2)) (12.4.127)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.4.127 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 2)) (12.4.127)
+Requirement already satisfied: nvidia-cudnn-cu12==9.1.0.70 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 2)) (9.1.0.70)
+Requirement already satisfied: nvidia-cublas-cu12==12.4.5.8 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 2)) (12.4.5.8)
+Requirement already satisfied: nvidia-cufft-cu12==11.2.1.3 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 2)) (11.2.1.3)
+Requirement already satisfied: nvidia-curand-cu12==10.3.5.147 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 2)) (10.3.5.147)
+Requirement already satisfied: nvidia-cusolver-cu12==11.6.1.9 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 2)) (11.6.1.9)
+Requirement already satisfied: nvidia-cusparse-cu12==12.3.1.170 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 2)) (12.3.1.170)
+Requirement already satisfied: nvidia-nccl-cu12==2.21.5 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 2)) (2.21.5)
+Requirement already satisfied: nvidia-nvtx-cu12==12.4.127 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 2)) (12.4.127)
+Requirement already satisfied: nvidia-nvjitlink-cu12==12.4.127 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 2)) (12.4.127)
+Requirement already satisfied: triton==3.1.0 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 2)) (3.1.0)
+Requirement already satisfied: sympy==1.13.1 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from torch->-r requirements.txt (line 2)) (1.13.1)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from sympy==1.13.1->torch->-r requirements.txt (line 2)) (1.3.0)
+Requirement already satisfied: dill in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from evaluate->-r requirements.txt (line 3)) (0.3.8)
+Requirement already satisfied: pandas in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from evaluate->-r requirements.txt (line 3)) (2.2.3)
+Requirement already satisfied: requests>=2.19.0 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from evaluate->-r requirements.txt (line 3)) (2.32.3)
+Requirement already satisfied: tqdm>=4.62.1 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from evaluate->-r requirements.txt (line 3)) (4.67.1)
+Requirement already satisfied: xxhash in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from evaluate->-r requirements.txt (line 3)) (3.5.0)
+Requirement already satisfied: multiprocess in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from evaluate->-r requirements.txt (line 3)) (0.70.16)
+Requirement already satisfied: packaging in /pfs/data5/software_uc2/bwhpc/common/devel/miniconda/23.9.0-py3.9.15/lib/python3.9/site-packages (from evaluate->-r requirements.txt (line 3)) (23.1)
+Requirement already satisfied: pyarrow>=15.0.0 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from datasets->-r requirements.txt (line 4)) (18.1.0)
+Requirement already satisfied: aiohttp in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from datasets->-r requirements.txt (line 4)) (3.11.9)
+Requirement already satisfied: pyyaml>=5.1 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from datasets->-r requirements.txt (line 4)) (6.0.2)
+Requirement already satisfied: regex!=2019.12.17 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from transformers->-r requirements.txt (line 6)) (2024.11.6)
+Requirement already satisfied: tokenizers<0.21,>=0.20 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from transformers->-r requirements.txt (line 6)) (0.20.3)
+Requirement already satisfied: safetensors>=0.4.1 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from transformers->-r requirements.txt (line 6)) (0.4.5)
+Requirement already satisfied: portalocker in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from sacrebleu->-r requirements.txt (line 7)) (3.0.0)
+Requirement already satisfied: tabulate>=0.8.9 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from sacrebleu->-r requirements.txt (line 7)) (0.9.0)
+Requirement already satisfied: colorama in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from sacrebleu->-r requirements.txt (line 7)) (0.4.6)
+Requirement already satisfied: lxml in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from sacrebleu->-r requirements.txt (line 7)) (5.3.0)
+Requirement already satisfied: psutil in /pfs/data5/software_uc2/bwhpc/common/devel/miniconda/23.9.0-py3.9.15/lib/python3.9/site-packages (from peft->-r requirements.txt (line 9)) (5.9.6)
+Requirement already satisfied: accelerate>=0.21.0 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from peft->-r requirements.txt (line 9)) (1.2.1)
+Requirement already satisfied: aiohappyeyeballs>=2.3.0 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from aiohttp->datasets->-r requirements.txt (line 4)) (2.4.4)
+Requirement already satisfied: aiosignal>=1.1.2 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from aiohttp->datasets->-r requirements.txt (line 4)) (1.3.1)
+Requirement already satisfied: async-timeout<6.0,>=4.0 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from aiohttp->datasets->-r requirements.txt (line 4)) (5.0.1)
+Requirement already satisfied: attrs>=17.3.0 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from aiohttp->datasets->-r requirements.txt (line 4)) (24.2.0)
+Requirement already satisfied: frozenlist>=1.1.1 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from aiohttp->datasets->-r requirements.txt (line 4)) (1.5.0)
+Requirement already satisfied: multidict<7.0,>=4.5 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from aiohttp->datasets->-r requirements.txt (line 4)) (6.1.0)
+Requirement already satisfied: propcache>=0.2.0 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from aiohttp->datasets->-r requirements.txt (line 4)) (0.2.1)
+Requirement already satisfied: yarl<2.0,>=1.17.0 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from aiohttp->datasets->-r requirements.txt (line 4)) (1.18.3)
+Requirement already satisfied: charset-normalizer<4,>=2 in /pfs/data5/software_uc2/bwhpc/common/devel/miniconda/23.9.0-py3.9.15/lib/python3.9/site-packages (from requests>=2.19.0->evaluate->-r requirements.txt (line 3)) (2.0.4)
+Requirement already satisfied: idna<4,>=2.5 in /pfs/data5/software_uc2/bwhpc/common/devel/miniconda/23.9.0-py3.9.15/lib/python3.9/site-packages (from requests>=2.19.0->evaluate->-r requirements.txt (line 3)) (3.4)
+Requirement already satisfied: urllib3<3,>=1.21.1 in /pfs/data5/software_uc2/bwhpc/common/devel/miniconda/23.9.0-py3.9.15/lib/python3.9/site-packages (from requests>=2.19.0->evaluate->-r requirements.txt (line 3)) (1.26.16)
+Requirement already satisfied: certifi>=2017.4.17 in /pfs/data5/software_uc2/bwhpc/common/devel/miniconda/23.9.0-py3.9.15/lib/python3.9/site-packages (from requests>=2.19.0->evaluate->-r requirements.txt (line 3)) (2023.7.22)
+Requirement already satisfied: MarkupSafe>=2.0 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from jinja2->torch->-r requirements.txt (line 2)) (3.0.2)
+Requirement already satisfied: python-dateutil>=2.8.2 in /pfs/data5/software_uc2/bwhpc/common/devel/miniconda/23.9.0-py3.9.15/lib/python3.9/site-packages (from pandas->evaluate->-r requirements.txt (line 3)) (2.8.2)
+Requirement already satisfied: pytz>=2020.1 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from pandas->evaluate->-r requirements.txt (line 3)) (2024.2)
+Requirement already satisfied: tzdata>=2022.7 in /pfs/data5/home/kit/stud/usxcp/.local/lib/python3.9/site-packages (from pandas->evaluate->-r requirements.txt (line 3)) (2024.2)
+Requirement already satisfied: six>=1.5 in /pfs/data5/software_uc2/bwhpc/common/devel/miniconda/23.9.0-py3.9.15/lib/python3.9/site-packages (from python-dateutil>=2.8.2->pandas->evaluate->-r requirements.txt (line 3)) (1.16.0)
+Map:   0%|          | 0/397712 [00:00<?, ? examples/s]Map:   1%|          | 2000/397712 [00:00<02:21, 2793.30 examples/s]Map:   1%|          | 4000/397712 [00:01<01:40, 3911.71 examples/s]Map:   2%|▏         | 6000/397712 [00:01<01:27, 4500.43 examples/s]Map:   2%|▏         | 8000/397712 [00:01<01:22, 4703.85 examples/s]Map:   3%|▎         | 10000/397712 [00:02<01:23, 4634.92 examples/s]Map:   3%|▎         | 12000/397712 [00:02<01:18, 4917.77 examples/s]Map:   4%|▎         | 14000/397712 [00:02<01:10, 5409.63 examples/s]Map:   4%|▍         | 16000/397712 [00:03<01:06, 5712.34 examples/s]Map:   5%|▍         | 18000/397712 [00:03<01:06, 5717.84 examples/s]Map:   5%|▌         | 20000/397712 [00:03<01:01, 6093.42 examples/s]Map:   6%|▌         | 22000/397712 [00:04<01:05, 5765.28 examples/s]Map:   6%|▌         | 24000/397712 [00:04<01:06, 5653.67 examples/s]Map:   7%|▋         | 26000/397712 [00:04<01:01, 6046.63 examples/s]Map:   7%|▋         | 28000/397712 [00:05<01:07, 5438.34 examples/s]Map:   8%|▊         | 30000/397712 [00:05<01:02, 5922.05 examples/s]Map:   8%|▊         | 32000/397712 [00:06<01:04, 5695.95 examples/s]Map:   9%|▊         | 34000/397712 [00:06<01:05, 5518.47 examples/s]Map:   9%|▉         | 36000/397712 [00:06<01:02, 5743.87 examples/s]Map:  10%|▉         | 38000/397712 [00:07<01:05, 5486.80 examples/s]Map:  10%|█         | 40000/397712 [00:07<01:04, 5562.83 examples/s]Map:  11%|█         | 42000/397712 [00:07<01:02, 5676.63 examples/s]Map:  11%|█         | 44000/397712 [00:08<01:15, 4697.45 examples/s]Map:  12%|█▏        | 46000/397712 [00:08<01:10, 5010.72 examples/s]Map:  12%|█▏        | 48000/397712 [00:09<01:07, 5200.33 examples/s]Map:  13%|█▎        | 50000/397712 [00:09<01:09, 4996.80 examples/s]Map:  13%|█▎        | 52000/397712 [00:09<01:08, 5061.82 examples/s]Map:  14%|█▎        | 54000/397712 [00:10<01:04, 5308.77 examples/s]Map:  14%|█▍        | 56000/397712 [00:10<01:02, 5511.44 examples/s]Map:  15%|█▍        | 58000/397712 [00:11<01:05, 5200.93 examples/s]Map:  15%|█▌        | 60000/397712 [00:11<01:01, 5501.54 examples/s]Map:  16%|█▌        | 62000/397712 [00:11<01:03, 5272.37 examples/s]Map:  16%|█▌        | 64000/397712 [00:12<01:03, 5289.08 examples/s]Map:  17%|█▋        | 66000/397712 [00:12<01:03, 5246.36 examples/s]Map:  17%|█▋        | 68000/397712 [00:12<01:02, 5292.38 examples/s]Map:  18%|█▊        | 70000/397712 [00:13<01:00, 5443.27 examples/s]Map:  18%|█▊        | 72000/397712 [00:13<00:58, 5541.41 examples/s]Map:  19%|█▊        | 74000/397712 [00:13<01:00, 5330.97 examples/s]Map:  19%|█▉        | 76000/397712 [00:14<01:02, 5174.32 examples/s]Map:  20%|█▉        | 78000/397712 [00:14<01:06, 4795.56 examples/s]Map:  20%|██        | 80000/397712 [00:15<01:04, 4892.89 examples/s]Map:  21%|██        | 82000/397712 [00:15<01:01, 5118.10 examples/s]Map:  21%|██        | 84000/397712 [00:15<00:56, 5549.60 examples/s]Map:  22%|██▏       | 86000/397712 [00:16<00:53, 5793.03 examples/s]Map:  22%|██▏       | 88000/397712 [00:16<00:52, 5950.92 examples/s]Map:  23%|██▎       | 90000/397712 [00:16<00:53, 5789.60 examples/s]Map:  23%|██▎       | 92000/397712 [00:17<00:59, 5155.48 examples/s]Map:  24%|██▎       | 94000/397712 [00:17<00:58, 5226.11 examples/s]Map:  24%|██▍       | 96000/397712 [00:18<01:04, 4679.17 examples/s]Map:  25%|██▍       | 98000/397712 [00:18<01:00, 4966.26 examples/s]Map:  25%|██▌       | 100000/397712 [00:18<00:58, 5119.14 examples/s]Map:  26%|██▌       | 102000/397712 [00:19<00:55, 5361.83 examples/s]Map:  26%|██▌       | 104000/397712 [00:19<00:56, 5230.64 examples/s]Map:  27%|██▋       | 106000/397712 [00:20<00:54, 5313.40 examples/s]Map:  27%|██▋       | 108000/397712 [00:20<00:55, 5209.20 examples/s]Map:  28%|██▊       | 110000/397712 [00:20<00:51, 5581.64 examples/s]Map:  28%|██▊       | 112000/397712 [00:21<00:56, 5064.50 examples/s]Map:  29%|██▊       | 114000/397712 [00:21<00:56, 5057.17 examples/s]Map:  29%|██▉       | 116000/397712 [00:22<00:54, 5210.68 examples/s]Map:  30%|██▉       | 118000/397712 [00:22<00:48, 5725.55 examples/s]Map:  30%|███       | 120000/397712 [00:22<00:47, 5892.13 examples/s]Map:  31%|███       | 122000/397712 [00:22<00:48, 5643.95 examples/s]Map:  31%|███       | 124000/397712 [00:23<00:48, 5655.24 examples/s]Map:  32%|███▏      | 126000/397712 [00:23<00:45, 5919.11 examples/s]Map:  32%|███▏      | 128000/397712 [00:23<00:44, 6032.87 examples/s]Map:  33%|███▎      | 130000/397712 [00:24<00:46, 5802.99 examples/s]Map:  33%|███▎      | 132000/397712 [00:24<00:44, 5955.49 examples/s]Map:  34%|███▎      | 134000/397712 [00:25<00:45, 5847.63 examples/s]Map:  34%|███▍      | 136000/397712 [00:25<00:43, 6038.65 examples/s]Map:  35%|███▍      | 138000/397712 [00:25<00:41, 6192.05 examples/s]Map:  35%|███▌      | 140000/397712 [00:25<00:41, 6184.27 examples/s]Map:  36%|███▌      | 142000/397712 [00:26<00:42, 6081.88 examples/s]Map:  36%|███▌      | 144000/397712 [00:26<00:41, 6100.00 examples/s]Map:  37%|███▋      | 146000/397712 [00:27<00:45, 5494.07 examples/s]Map:  37%|███▋      | 148000/397712 [00:27<00:43, 5758.95 examples/s]Map:  38%|███▊      | 150000/397712 [00:27<00:40, 6112.25 examples/s]Map:  38%|███▊      | 152000/397712 [00:27<00:39, 6254.44 examples/s]Map:  39%|███▊      | 154000/397712 [00:28<00:37, 6428.83 examples/s]Map:  39%|███▉      | 156000/397712 [00:28<00:40, 5920.26 examples/s]Map:  40%|███▉      | 158000/397712 [00:29<00:43, 5477.78 examples/s]Map:  40%|████      | 160000/397712 [00:29<00:40, 5865.18 examples/s]Map:  41%|████      | 162000/397712 [00:29<00:38, 6188.77 examples/s]Map:  41%|████      | 164000/397712 [00:30<00:40, 5792.37 examples/s]Map:  42%|████▏     | 166000/397712 [00:30<00:37, 6122.01 examples/s]Map:  42%|████▏     | 168000/397712 [00:30<00:39, 5810.93 examples/s]Map:  43%|████▎     | 170000/397712 [00:31<00:39, 5821.63 examples/s]Map:  43%|████▎     | 172000/397712 [00:31<00:44, 5119.17 examples/s]Map:  44%|████▍     | 174000/397712 [00:31<00:42, 5239.04 examples/s]Map:  44%|████▍     | 176000/397712 [00:32<00:40, 5498.32 examples/s]Map:  45%|████▍     | 178000/397712 [00:32<00:38, 5651.60 examples/s]Map:  45%|████▌     | 180000/397712 [00:33<00:41, 5226.48 examples/s]Map:  46%|████▌     | 182000/397712 [00:33<00:40, 5320.55 examples/s]Map:  46%|████▋     | 184000/397712 [00:33<00:38, 5526.81 examples/s]Map:  47%|████▋     | 186000/397712 [00:33<00:35, 5906.47 examples/s]Map:  47%|████▋     | 188000/397712 [00:34<00:35, 5929.01 examples/s]Map:  48%|████▊     | 190000/397712 [00:34<00:33, 6116.83 examples/s]Map:  48%|████▊     | 192000/397712 [00:34<00:32, 6330.91 examples/s]Map:  49%|████▉     | 194000/397712 [00:35<00:32, 6324.32 examples/s]Map:  49%|████▉     | 196000/397712 [00:35<00:30, 6552.72 examples/s]Map:  50%|████▉     | 198000/397712 [00:35<00:34, 5728.95 examples/s]Map:  50%|█████     | 200000/397712 [00:36<00:35, 5530.24 examples/s]Map:  51%|█████     | 202000/397712 [00:36<00:36, 5430.69 examples/s]Map:  51%|█████▏    | 204000/397712 [00:37<00:35, 5407.74 examples/s]Map:  52%|█████▏    | 206000/397712 [00:37<00:33, 5725.66 examples/s]Map:  52%|█████▏    | 208000/397712 [00:37<00:31, 6050.87 examples/s]Map:  53%|█████▎    | 210000/397712 [00:37<00:30, 6217.94 examples/s]Map:  53%|█████▎    | 212000/397712 [00:38<00:29, 6356.98 examples/s]Map:  54%|█████▍    | 214000/397712 [00:38<00:30, 6002.71 examples/s]Map:  54%|█████▍    | 216000/397712 [00:39<00:31, 5768.37 examples/s]Map:  55%|█████▍    | 218000/397712 [00:39<00:29, 6012.63 examples/s]Map:  55%|█████▌    | 220000/397712 [00:39<00:31, 5628.41 examples/s]Map:  56%|█████▌    | 222000/397712 [00:40<00:34, 5026.17 examples/s]Map:  56%|█████▋    | 224000/397712 [00:40<00:31, 5441.25 examples/s]Map:  57%|█████▋    | 226000/397712 [00:40<00:29, 5763.42 examples/s]Map:  57%|█████▋    | 228000/397712 [00:41<00:28, 6034.06 examples/s]Map:  58%|█████▊    | 230000/397712 [00:41<00:28, 5979.40 examples/s]Map:  58%|█████▊    | 232000/397712 [00:41<00:29, 5684.50 examples/s]Map:  59%|█████▉    | 234000/397712 [00:42<00:29, 5500.43 examples/s]Map:  59%|█████▉    | 236000/397712 [00:42<00:27, 5889.09 examples/s]Map:  60%|█████▉    | 238000/397712 [00:42<00:27, 5861.56 examples/s]Map:  60%|██████    | 240000/397712 [00:43<00:27, 5696.95 examples/s]Map:  61%|██████    | 242000/397712 [00:43<00:28, 5503.52 examples/s]Map:  61%|██████▏   | 244000/397712 [00:44<00:27, 5607.27 examples/s]Map:  62%|██████▏   | 246000/397712 [00:44<00:26, 5681.65 examples/s]Map:  62%|██████▏   | 248000/397712 [00:44<00:26, 5638.33 examples/s]Map:  63%|██████▎   | 250000/397712 [00:45<00:26, 5632.03 examples/s]Map:  63%|██████▎   | 252000/397712 [00:45<00:27, 5311.13 examples/s]Map:  64%|██████▍   | 254000/397712 [00:45<00:26, 5395.90 examples/s]Map:  64%|██████▍   | 256000/397712 [00:46<00:24, 5820.49 examples/s]Map:  65%|██████▍   | 258000/397712 [00:46<00:24, 5771.07 examples/s]Map:  65%|██████▌   | 260000/397712 [00:46<00:23, 5813.17 examples/s]Map:  66%|██████▌   | 262000/397712 [00:47<00:23, 5690.24 examples/s]Map:  66%|██████▋   | 264000/397712 [00:47<00:23, 5751.92 examples/s]Map:  67%|██████▋   | 266000/397712 [00:47<00:23, 5512.73 examples/s]Map:  67%|██████▋   | 268000/397712 [00:48<00:23, 5519.66 examples/s]Map:  68%|██████▊   | 270000/397712 [00:48<00:23, 5447.07 examples/s]Map:  68%|██████▊   | 272000/397712 [00:48<00:21, 5812.61 examples/s]Map:  69%|██████▉   | 274000/397712 [00:49<00:21, 5838.76 examples/s]Map:  69%|██████▉   | 276000/397712 [00:49<00:20, 5824.16 examples/s]Map:  70%|██████▉   | 278000/397712 [00:49<00:19, 6056.36 examples/s]Map:  70%|███████   | 280000/397712 [00:50<00:18, 6442.40 examples/s]Map:  71%|███████   | 282000/397712 [00:50<00:20, 5658.41 examples/s]Map:  71%|███████▏  | 284000/397712 [00:50<00:19, 5924.87 examples/s]Map:  72%|███████▏  | 286000/397712 [00:51<00:18, 5956.59 examples/s]Map:  72%|███████▏  | 288000/397712 [00:51<00:17, 6163.42 examples/s]Map:  73%|███████▎  | 290000/397712 [00:51<00:17, 6242.67 examples/s]Map:  73%|███████▎  | 292000/397712 [00:52<00:17, 6032.74 examples/s]Map:  74%|███████▍  | 294000/397712 [00:52<00:16, 6185.37 examples/s]Map:  74%|███████▍  | 296000/397712 [00:52<00:15, 6482.28 examples/s]Map:  75%|███████▍  | 298000/397712 [00:53<00:15, 6546.96 examples/s]Map:  75%|███████▌  | 300000/397712 [00:53<00:16, 6003.13 examples/s]Map:  76%|███████▌  | 302000/397712 [00:53<00:16, 5939.29 examples/s]Map:  76%|███████▋  | 304000/397712 [00:54<00:16, 5808.70 examples/s]Map:  77%|███████▋  | 306000/397712 [00:54<00:14, 6156.35 examples/s]Map:  77%|███████▋  | 308000/397712 [00:54<00:14, 6308.25 examples/s]Map:  78%|███████▊  | 310000/397712 [00:55<00:15, 5504.34 examples/s]Map:  78%|███████▊  | 312000/397712 [00:55<00:14, 5796.37 examples/s]Map:  79%|███████▉  | 314000/397712 [00:55<00:13, 6126.68 examples/s]Map:  79%|███████▉  | 316000/397712 [00:56<00:14, 5582.56 examples/s]Map:  80%|███████▉  | 318000/397712 [00:56<00:13, 5738.70 examples/s]Map:  80%|████████  | 320000/397712 [00:56<00:13, 5794.45 examples/s]Map:  81%|████████  | 322000/397712 [00:57<00:12, 6041.62 examples/s]Map:  81%|████████▏ | 324000/397712 [00:57<00:12, 5912.28 examples/s]Map:  82%|████████▏ | 326000/397712 [00:57<00:12, 5808.62 examples/s]Map:  82%|████████▏ | 328000/397712 [00:58<00:12, 5743.83 examples/s]Map:  83%|████████▎ | 330000/397712 [00:58<00:11, 5728.99 examples/s]Map:  83%|████████▎ | 332000/397712 [00:58<00:10, 6000.34 examples/s]Map:  84%|████████▍ | 334000/397712 [00:59<00:11, 5614.02 examples/s]Map:  84%|████████▍ | 336000/397712 [00:59<00:10, 6017.66 examples/s]Map:  85%|████████▍ | 338000/397712 [00:59<00:09, 6273.26 examples/s]Map:  85%|████████▌ | 340000/397712 [01:00<00:09, 6395.84 examples/s]Map:  86%|████████▌ | 342000/397712 [01:00<00:08, 6567.98 examples/s]Map:  86%|████████▋ | 344000/397712 [01:00<00:07, 6821.99 examples/s]Map:  87%|████████▋ | 346000/397712 [01:01<00:07, 6966.88 examples/s]Map:  88%|████████▊ | 348000/397712 [01:01<00:07, 6605.44 examples/s]Map:  88%|████████▊ | 350000/397712 [01:01<00:08, 5959.15 examples/s]Map:  89%|████████▊ | 352000/397712 [01:02<00:07, 5796.55 examples/s]Map:  89%|████████▉ | 354000/397712 [01:02<00:07, 6127.81 examples/s]Map:  90%|████████▉ | 356000/397712 [01:02<00:06, 6122.93 examples/s]Map:  90%|█████████ | 358000/397712 [01:03<00:06, 6521.46 examples/s]Map:  91%|█████████ | 360000/397712 [01:03<00:06, 5842.01 examples/s]Map:  91%|█████████ | 362000/397712 [01:03<00:06, 5931.71 examples/s]Map:  92%|█████████▏| 364000/397712 [01:04<00:05, 5955.02 examples/s]Map:  92%|█████████▏| 366000/397712 [01:04<00:05, 5911.17 examples/s]Map:  93%|█████████▎| 368000/397712 [01:04<00:05, 5557.46 examples/s]Map:  93%|█████████▎| 370000/397712 [01:05<00:04, 5977.06 examples/s]Map:  94%|█████████▎| 372000/397712 [01:05<00:04, 5934.75 examples/s]Map:  94%|█████████▍| 374000/397712 [01:05<00:03, 6165.40 examples/s]Map:  95%|█████████▍| 376000/397712 [01:06<00:03, 6515.91 examples/s]Map:  95%|█████████▌| 378000/397712 [01:06<00:03, 6161.21 examples/s]Map:  96%|█████████▌| 380000/397712 [01:06<00:02, 6315.40 examples/s]Map:  96%|█████████▌| 382000/397712 [01:07<00:02, 6497.47 examples/s]Map:  97%|█████████▋| 384000/397712 [01:07<00:02, 5861.95 examples/s]Map:  97%|█████████▋| 386000/397712 [01:07<00:01, 5900.67 examples/s]Map:  98%|█████████▊| 388000/397712 [01:08<00:01, 5719.72 examples/s]Map:  98%|█████████▊| 390000/397712 [01:08<00:01, 5578.74 examples/s]Map:  99%|█████████▊| 392000/397712 [01:08<00:00, 6060.97 examples/s]Map:  99%|█████████▉| 394000/397712 [01:09<00:00, 6475.84 examples/s]Map: 100%|█████████▉| 396000/397712 [01:09<00:00, 7174.11 examples/s]Map: 100%|██████████| 397712/397712 [01:09<00:00, 7710.82 examples/s]Map: 100%|██████████| 397712/397712 [01:09<00:00, 5724.77 examples/s]
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:02<00:02,  2.23s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.28s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.42s/it]
 Detected kernel version 4.18.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
-  0%|          | 0/2 [00:00<?, ?it/s] 50%|█████     | 1/2 [00:05<00:05,  5.40s/it]100%|██████████| 2/2 [00:05<00:00,  2.37s/it]
-  0%|          | 0/1 [00:00<?, ?it/s][ATraceback (most recent call last):
-  File "/pfs/data5/home/kit/stud/usxcp/mini-decoder-adaptation/xnli_lora_training.py", line 138, in <module>
+  0%|          | 0/245440 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/transformers/tokenization_utils_base.py", line 776, in convert_to_tensors
+    tensor = as_tensor(value)
+  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/transformers/tokenization_utils_base.py", line 738, in as_tensor
+    return torch.tensor(value)
+ValueError: expected sequence of length 292 at dim 1 (got 293)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/pfs/data5/home/kit/stud/usxcp/locomp-langtrans/xnli_lora_training.py", line 123, in <module>
     run_training_experiment()
-  File "/pfs/data5/home/kit/stud/usxcp/mini-decoder-adaptation/xnli_lora_training.py", line 133, in run_training_experiment
+  File "/pfs/data5/home/kit/stud/usxcp/locomp-langtrans/xnli_lora_training.py", line 118, in run_training_experiment
     trainer.train()
   File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/transformers/trainer.py", line 2123, in train
     return inner_training_loop(
-  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/transformers/trainer.py", line 2573, in _inner_training_loop
-    self._maybe_log_save_evaluate(tr_loss, grad_norm, model, trial, epoch, ignore_keys_for_eval)
-  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/transformers/trainer.py", line 3004, in _maybe_log_save_evaluate
-    metrics = self._evaluate(trial, ignore_keys_for_eval)
-  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/transformers/trainer.py", line 2958, in _evaluate
-    metrics = self.evaluate(ignore_keys=ignore_keys_for_eval)
-  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/transformers/trainer.py", line 3975, in evaluate
-    output = eval_loop(
-  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/transformers/trainer.py", line 4264, in evaluation_loop
-    metrics = self.compute_metrics(
-  File "/pfs/data5/home/kit/stud/usxcp/mini-decoder-adaptation/xnli_lora_training.py", line 108, in compute_metrics
-    xnli_metric.compute(predictions=eval_pred.predictions, references=eval_pred.label_ids)
-  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/evaluate/module.py", line 455, in compute
-    self.add_batch(**inputs)
-  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/evaluate/module.py", line 546, in add_batch
-    raise ValueError(error_msg) from None
-ValueError: Predictions and/or references don't match the expected format.
-Expected format: {'predictions': Value(dtype='int64', id=None), 'references': Value(dtype='int64', id=None)},
-Input predictions: [[[ 2.8350658   3.582805    7.025703   ... -1.2479622  -1.2478637
-   -1.247749  ]
-  [ 2.8350651   3.5828042   7.0257044  ... -1.2479621  -1.2478637
-   -1.2477489 ]
-  [-2.099439   -0.23878255  1.1134876  ...  0.09565462  0.09561656
-    0.09541215]
-  ...
-  [-4.834404   -4.5986614  -4.9299254  ...  4.1669025   4.1659408
-    4.1660953 ]
-  [-4.7288046  -4.669228   -4.921017   ...  4.053287    4.0523014
-    4.052453  ]
-  [-4.7812443  -4.80491    -5.02969    ...  3.9359117   3.934936
-    3.935103  ]]],
-Input references: [[128000 128000 128006   9125 128007    198   6396     25   3308   1463
-     279   5133   1990   1403  23719    320   1762  74306    323  31178
-    3677  27099    512     12   1472  28832   6013    449   4154   6966
-    9109  25002    315   1521   9382     25    330    306    607    479
-     498    330   8386    329   2538    498    330  60668    702     12
-    9503   4276   2997    904   1023   4339     11  62603     11    477
-   41941    198     12   9503   4276    923    502   8128    477  12908
-    1603     14  10924    279   2440    271  13617    220     16    512
-   42562   1082     25    578   8415    374  21811    627     39  60400
-   13491     25    578  10065    374  41219    627   5207     25  87092
-     479    271  13617    220     17    512  42562   1082     25    578
-   13180    374   6437    627     39  60400  13491     25    578  13180
-     374   2579    627   5207     25  50859    271  13617    220     18
-     512  42562   1082     25    578    893    374  11689    627     39
-   60400  13491     25   1283    374  12512    264   9072    627   5207
-      25  21277    198   -100 128006    882 128007    198   7184  49229
-     512  42562   1082     25    480    954    323  59730  16853     39
-   60400  13491     25    473   1430  49300     82  16853   5207     25
-     220   -100 128006  78191 128007   -100   -100   -100   -100   -100
-    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
-    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
-    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
-    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
-    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
-    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
-    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
-    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
-    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
-    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
-    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
-    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
-    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
-    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
-    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
-    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
-    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
-    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
-    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
-    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
-    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
-    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
-    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
-    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
-    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
-    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
-    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
-    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
-    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
-    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
-    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
-    -100   -100   -100   -100   -100   -100   -100   -100   -100   -100
-    -100   -100]]
-100%|██████████| 2/2 [00:06<00:00,  3.47s/it]
+  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/transformers/trainer.py", line 2427, in _inner_training_loop
+    batch_samples, num_items_in_batch = self.get_batch_samples(epoch_iterator, num_batches)
+  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/transformers/trainer.py", line 5045, in get_batch_samples
+    batch_samples += [next(epoch_iterator)]
+  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/accelerate/data_loader.py", line 552, in __iter__
+    current_batch = next(dataloader_iter)
+  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/torch/utils/data/dataloader.py", line 701, in __next__
+    data = self._next_data()
+  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/torch/utils/data/dataloader.py", line 757, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/torch/utils/data/_utils/fetch.py", line 55, in fetch
+    return self.collate_fn(data)
+  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/transformers/data/data_collator.py", line 45, in __call__
+    return self.torch_call(features)
+  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/transformers/data/data_collator.py", line 807, in torch_call
+    batch = pad_without_fast_tokenizer_warning(
+  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/transformers/data/data_collator.py", line 66, in pad_without_fast_tokenizer_warning
+    padded = tokenizer.pad(*pad_args, **pad_kwargs)
+  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/transformers/tokenization_utils_base.py", line 3541, in pad
+    return BatchEncoding(batch_outputs, tensor_type=return_tensors)
+  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/transformers/tokenization_utils_base.py", line 240, in __init__
+    self.convert_to_tensors(tensor_type=tensor_type, prepend_batch_axis=prepend_batch_axis)
+  File "/home/kit/stud/usxcp/.local/lib/python3.9/site-packages/transformers/tokenization_utils_base.py", line 792, in convert_to_tensors
+    raise ValueError(
+ValueError: Unable to create tensor, you should probably activate truncation and/or padding with 'padding=True' 'truncation=True' to have batched tensors with the same length. Perhaps your features (`labels` in this case) have excessive nesting (inputs type `list` where type `int` is expected).
+  0%|          | 0/245440 [00:01<?, ?it/s]
 
-                                     [A
 ============================= JOB FEEDBACK =============================
 
-NodeName=uc2n520
-Job ID: 25138561
+NodeName=uc2n[486,519]
+Job ID: 25186646
 Cluster: uc2
 User/Group: usxcp/stud
 State: COMPLETED (exit code 0)
-Nodes: 1
+Nodes: 2
 Cores per node: 20
-CPU Utilized: 00:00:14
-CPU Efficiency: 1.27% of 00:18:20 core-walltime
-Job Wall-clock time: 00:00:55
-Memory Utilized: 1.35 GB
-Memory Efficiency: 4.22% of 32.00 GB
+CPU Utilized: 00:04:54
+CPU Efficiency: 2.36% of 03:28:00 core-walltime
+Job Wall-clock time: 00:05:12
+Memory Utilized: 4.83 GB
+Memory Efficiency: 7.54% of 64.00 GB
