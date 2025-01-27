@@ -73,7 +73,7 @@ def preprocess_dataset(dataset, tokenizer):
         create_prompt_dict,
         remove_columns=['premise', 'hypothesis', 'label']
     )
-    tokenized_dataset = prompt_dataset.map(tokenize_function, batched=True)
+    tokenized_dataset = prompt_dataset.map(tokenize_function, batched=True, batch_size=2000)
     tokenized_dataset = tokenized_dataset.remove_columns(['prompt'])
 
     return tokenized_dataset
@@ -105,7 +105,6 @@ def run_training_experiment():
     data_collator = DataCollatorForLanguageModeling(
         tokenizer=tokenizer,
         mlm=False,
-        batch_size=2000
         )
 
     trainer = Trainer(
