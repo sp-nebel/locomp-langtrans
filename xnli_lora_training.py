@@ -104,7 +104,8 @@ def run_training_experiment():
 
     data_collator = DataCollatorForLanguageModeling(
         tokenizer=tokenizer,
-        mlm=False
+        mlm=False,
+        batch_size=2000
         )
 
     trainer = Trainer(
