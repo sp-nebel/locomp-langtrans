@@ -67,7 +67,7 @@ def preprocess_dataset(dataset, tokenizer):
           max_length=512,
       )
 
-      model_inputs['labels'] = model_inputs['input_ids']
+      model_inputs['labels'] = model_inputs['input_ids'][1:] + [tokenizer.pad_token_id]
       return model_inputs
 
     prompt_dataset = dataset.map(
