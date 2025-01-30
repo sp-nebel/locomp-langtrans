@@ -61,9 +61,7 @@ def preprocess_dataset(dataset, tokenizer):
     def tokenize_function(examples):
       model_inputs = tokenizer(
           examples['prompt'],
-          max_length=None,
-          truncation=True,
-          padding=True,
+          return_tensors=None,
       )
 
       model_inputs['labels'] = model_inputs['input_ids']
