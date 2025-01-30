@@ -67,14 +67,30 @@ def preprocess_dataset(dataset, tokenizer):
           max_length=512,
       )
 
-      model_inputs['labels'] = model_inputs['input_ids'][1:] + [tokenizer.pad_token_id]
-      return model_inputs
+      # Ensure labels are handled correctly (e.g., shifted by one position)
+      labels = model_inputs["input_ids"].copy()
+      if tokenizer.pad_token_id is not None:
+        for i in range(len(labels)):
+            print(f"--- Example {i} ---")
+            print(f"  labels[i] type: {type(labels[i])}")
+            print(f"  labels[i] (before shift): {labels[i]}")
+
+            # Check if labels[i] is a list before applying list operations
+            if isinstance(labels[i], list):
+                labels[i] = labels[i][1:] + [tokenizer.pad_token_id]
+            else:
+                print(f"  WARNING: labels[i] is not a list. Skipping shift.")
+
+                print(f"  labels[i] (after shift): {labels[i]}")  # Print after shift (if applied)
+
+        model_inputs['labels'] = labels
+        return model_inputs
 
     prompt_dataset = dataset.map(
         create_prompt_dict,
         remove_columns=['premise', 'hypothesis', 'label']
     )
-    tokenized_dataset = prompt_dataset.map(tokenize_function, batched=True, batch_size=2000)
+    tokenized_dataset = prompt_dataset.map(tokenize_function, batched=True)
     tokenized_dataset = tokenized_dataset.remove_columns(['prompt'])
 
     return tokenized_dataset
