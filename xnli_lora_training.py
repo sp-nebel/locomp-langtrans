@@ -62,7 +62,7 @@ def preprocess_dataset(dataset, tokenizer):
       model_inputs = tokenizer(
           examples['prompt'],
           return_tensors=None,
-          padding=True,
+          padding='max_length',
           truncation=True,
           max_length=512,
       )
@@ -71,9 +71,6 @@ def preprocess_dataset(dataset, tokenizer):
       labels = model_inputs["input_ids"].copy()
       if tokenizer.pad_token_id is not None:
         for i in range(len(labels)):
-            print(f"--- Example {i} ---")
-            print(f"  labels[i] type: {type(labels[i])}")
-            print(f"  labels[i] (before shift): {labels[i]}")
 
             # Check if labels[i] is a list before applying list operations
             if isinstance(labels[i], list):
