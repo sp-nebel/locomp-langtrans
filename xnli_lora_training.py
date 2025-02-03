@@ -44,8 +44,8 @@ training_args = TrainingArguments(
     logging_steps=5,
     remove_unused_columns=True,
     logging_dir='./logs',
-    per_device_train_batch_size=8,
-    per_device_eval_batch_size=8,
+    per_device_train_batch_size=4,
+    per_device_eval_batch_size=4,
 )
 
 def prepare_tokenized_xnlis(tokenizer):
@@ -115,7 +115,8 @@ def run_training_experiment():
         args=training_args,
         train_dataset=xnlis['train'],
         eval_dataset=xnlis['test'],
-        data_collator=data_collator
+        data_collator=data_collator,
+        tokenizer=tokenizer,
     )
 
     trainer.train()
