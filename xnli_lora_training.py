@@ -50,9 +50,9 @@ training_args = TrainingArguments(
 )
 
 def prepare_tokenized_xnlis(tokenizer):
-    xnli_train = load_dataset('xnli', 'en', split='train[:392702]+test[:5010]', streaming=False)
+    xnli_train = load_dataset('xnli', 'en', split='train[:19635]+test[:250]', streaming=False)
     xnli_train = preprocess_dataset(xnli_train, tokenizer)
-    return xnli_train.train_test_split(train_size=392702, shuffle=False)
+    return xnli_train.train_test_split(train_size=19635, shuffle=False)
 
 def preprocess_dataset(dataset, tokenizer):
     def create_prompt_dict(example):
