@@ -118,6 +118,7 @@ def run_training_experiment():
         eval_dataset=xnlis['test'],
         data_collator=data_collator,
         tokenizer=tokenizer,
+        eval_on_start=True
     )
 
     trainer.train()
