@@ -38,14 +38,15 @@ lora_config = LoraConfig(
 training_args = TrainingArguments(
     output_dir=f'./xnli_lora_output',
     learning_rate=5e-4,
-    num_train_epochs=5,
+    num_train_epochs=2,
     save_total_limit=3,
     eval_strategy='epoch',
-    logging_steps=5,
+    logging_steps=10,
     remove_unused_columns=True,
     logging_dir='./logs',
     per_device_train_batch_size=4,
     per_device_eval_batch_size=4,
+    gradient_accumulation_steps=2,
 )
 
 def prepare_tokenized_xnlis(tokenizer):
