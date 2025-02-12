@@ -37,7 +37,7 @@ lora_config = LoraConfig(
 
 training_args = TrainingArguments(
     output_dir=f'./xnli_lora_output',
-    learning_rate=5e-4,
+    learning_rate=5e-4, # research optimal learning rate for lora training
     num_train_epochs=1,
     save_total_limit=3,
     eval_strategy='epoch',
@@ -46,11 +46,12 @@ training_args = TrainingArguments(
     logging_dir='./logs',
     per_device_train_batch_size=4,
     per_device_eval_batch_size=4,
-    gradient_accumulation_steps=2,
+    gradient_accumulation_steps=2, # research optimal gradient accumulation steps for lora training
+    # consider fp16 training, or check if it is default
 )
 
 def prepare_tokenized_xnlis(tokenizer):
-    xnli_train = load_dataset('xnli', 'en', split='train[:19635]+test[:250]', streaming=False)
+    xnli_train = load_dataset('xnli', 'en', split='train[:19635]+validation[:250]', streaming=False)
     xnli_train = preprocess_dataset(xnli_train, tokenizer)
     return xnli_train.train_test_split(train_size=19635, shuffle=False)
 
