@@ -1,5 +1,6 @@
+import copy
 from datasets import load_dataset
-from transformers import AutoTokenizer, AutoModelForCausalLM, TrainingArguments, Trainer, DataCollatorForLanguageModeling
+from transformers import AutoTokenizer, AutoModelForCausalLM, TrainingArguments, Trainer, DataCollatorForSeq2Seq
 from peft import LoraConfig, get_peft_model
 import torch
 
@@ -25,13 +26,18 @@ entailment_id = 0
 contradiction_id = 2
 neutral_id = 1
 
+IGNORE_INDEX = -100
+DEFAULT_PAD_TOKEN = "[PAD]"
+DEFAULT_EOS_TOKEN = "</s>"
+DEFAULT_BOS_TOKEN = "<s>"
+DEFAULT_UNK_TOKEN = "<unk>"
+
 lora_config = LoraConfig(
     r=8,
     lora_alpha=16,
-    lora_dropout=0.1,
+    lora_dropout=0.05,
     bias='lora_only',
     use_rslora=True,
-    modules_to_save=["decode_head"],
     task_type='CAUSAL_LM',
 )
 
@@ -64,12 +70,12 @@ def preprocess_dataset(dataset, tokenizer):
         model_inputs = tokenizer(
           examples['prompt'],
           return_tensors=None,
-          padding='max_length',
+          padding=False,
           truncation=True,
-          max_length=512,
+          max_length=1024,
       )
 
-        labels = model_inputs['input_ids'].copy()
+        labels = copy.deepcopy(model_inputs['input_ids'])
 
         model_inputs['labels'] = labels
         return model_inputs
@@ -78,7 +84,7 @@ def preprocess_dataset(dataset, tokenizer):
         create_prompt_dict,
         remove_columns=['premise', 'hypothesis', 'label']
     )
-    tokenized_dataset = prompt_dataset.map(tokenize_function, batched=False)
+    tokenized_dataset = prompt_dataset.map(tokenize_function, batched=True)
     tokenized_dataset = tokenized_dataset.remove_columns(['prompt'])
 
     return tokenized_dataset
@@ -101,15 +107,26 @@ def setup_peft_model(model_name, config):
 
 def run_training_experiment():
     tokenizer = AutoTokenizer.from_pretrained(model_name)
-    tokenizer.pad_token = tokenizer.eos_token
-    tokenizer.padding_side = 'right' 
+    if tokenizer.pad_token is None:
+        tokenizer.add_special_tokens(dict(pad_token=PAD_TOKEN))
+    tokenizer.padding_side = 'right'
+    tokenizer.add_special_tokens(
+            {
+                "eos_token": DEFAULT_EOS_TOKEN,
+                "bos_token": DEFAULT_BOS_TOKEN,
+                "unk_token": DEFAULT_UNK_TOKEN,
+            } 
+    )
 
     xnlis = prepare_tokenized_xnlis(tokenizer)
     model = setup_peft_model(model_name, lora_config)
 
-    data_collator = DataCollatorForLanguageModeling(
+    data_collator = DataCollatorForSeq2Seq(
         tokenizer=tokenizer,
-        mlm=False,
+        pad_to_multiple_of=8,
+        return_tensors='pt',
+        padding=True,
+        label_pad_token_id=IGNORE_INDEX
         )
 
     trainer = Trainer(
