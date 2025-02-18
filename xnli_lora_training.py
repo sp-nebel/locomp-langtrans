@@ -54,12 +54,13 @@ training_args = TrainingArguments(
     per_device_eval_batch_size=4,
     gradient_accumulation_steps=2, # research optimal gradient accumulation steps for lora training
     # consider fp16 training, or check if it is default
+    eval_on_start=True,
 )
 
 def prepare_tokenized_xnlis(tokenizer):
-    xnli_train = load_dataset('xnli', 'en', split='train[:19635]+validation[:250]', streaming=False)
+    xnli_train = load_dataset('xnli', 'en', split='train[:635]+validation[:50]', streaming=False)
     xnli_train = preprocess_dataset(xnli_train, tokenizer)
-    return xnli_train.train_test_split(train_size=19635, shuffle=False)
+    return xnli_train.train_test_split(train_size=635, shuffle=False)
 
 def preprocess_dataset(dataset, tokenizer):
     def create_prompt_dict(example):
@@ -108,7 +109,7 @@ def setup_peft_model(model_name, config):
 def run_training_experiment():
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     if tokenizer.pad_token is None:
-        tokenizer.add_special_tokens(dict(pad_token=PAD_TOKEN))
+        tokenizer.add_special_tokens(dict(pad_token=DEFAULT_PAD_TOKEN))
     tokenizer.padding_side = 'right'
     tokenizer.add_special_tokens(
             {
@@ -136,7 +137,6 @@ def run_training_experiment():
         eval_dataset=xnlis['test'],
         data_collator=data_collator,
         tokenizer=tokenizer,
-        eval_on_start=True
     )
 
     trainer.train()
