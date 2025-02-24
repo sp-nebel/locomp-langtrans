@@ -5,7 +5,7 @@ model_path=meta-llama/Llama-3.2-3B-Instruct
 model_save=output/models/parrot-hint-lora-7b
 
 # HOST_NUM will be 1
-torchrun --nnodes $HOST_NUM --node_rank $INDEX --nproc_per_node 1 \
+torchrun --nnodes 1 --node_rank $INDEX --nproc_per_node 1 \
     ${train_path} \
     --model_name_or_path ${model_path} \
     --train_file data/data_parrot_hf.json \
