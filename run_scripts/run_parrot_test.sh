@@ -10,7 +10,8 @@
 #SBATCH --output=../parrot_job.out
 
 module load devel/miniconda
-module load devel/cuda
+module load devel/cuda/12.4
+module load compiler/gnu/10.2
 conda activate llama_test_env
 pip install -r requirements.txt
 source run_scripts/run_parrot_command.sh

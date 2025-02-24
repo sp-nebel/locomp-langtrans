@@ -1,2 +1,2 @@
--i https://download.pytorch.org/whl/cu102
+-i https://download.pytorch.org/whl/cu124
 torch == 1.13.1
